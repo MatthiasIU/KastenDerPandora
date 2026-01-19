@@ -84,90 +84,76 @@ KI wurde geplant bzw. genutzt für:
 ----------------------------------------------------------------------------------------------------
 
 
-1. Projektgrundlage festziehen
+## Projektablauf
 
-Package-Struktur festlegen (ui, domain, data, utils)
+### 1. Projektgrundlage festziehen
+- Package-Struktur festlegen  
+  - `ui`, `domain`, `data`, `utils`
+- GitHub-Repository aufräumen  
+- README anlegen mit:
+  - Projektziel  
+  - Tech-Stack  
+  - Grober Planung
+- Kotlin-Style und Namenskonventionen definieren  
 
-GitHub-Repo aufräumen, README mit Projektziel, Tech-Stack, Planung anlegen
+### 2. Architektur aufsetzen
+- Einführung von **MVVM**  
+  - View, ViewModel, Model
+- Zentrale `MainActivity` mit Fragment-Container  
+- Navigation Component einrichten  
+- Basisklassen für Werkzeuge definieren, z. B. `ToolFragment`  
 
-Kotlin-Style, Namenskonventionen definieren
+### 3. Raster-Startscreen (Kernfeature)
+- `RecyclerView` mit `GridLayoutManager`  
+- Dummy-Tools als Platzhalter  
+- Drag & Drop zum Umsortieren (`ItemTouchHelper`)  
+- Persistenz der Reihenfolge  
+  - `SharedPreferences` oder `DataStore`  
 
-2. Architektur aufsetzen
+### 4. Erste echte Werkzeuge implementieren
+**Empfohlene Reihenfolge:**
+1. Zähler  
+2. Rechner  
+3. Taschenlampe  
 
-MVVM einführen (View, ViewModel, Model)
+**Begründung:**  
+- Geringe Sensorabhängigkeit  
+- Gute Testbarkeit  
+- Schnelle Erfolgserlebnisse  
 
-Zentrale MainActivity mit Fragment-Container
+### 5. Einstellungen-Seite
+- Darkmode umschaltbar  
+- Globale Schriftgröße  
+- Sprache vorbereiten (`strings.xml`)  
+- Premium-Platzhalter  
 
-Navigation Component einrichten
+### 6. Systemzugriffe kapseln
+- Sensoren, Kamera, Audio strikt im **Data-Layer**  
+- Zentrale Verwaltung von Permissions  
+- Fallbacks für nicht verfügbare Hardware  
 
-Basisklassen für Werkzeuge definieren, z. B. ToolFragment
+### 7. Tests einführen
+- Unit-Tests für:
+  - Rechner  
+  - Zähler
+- Tests erklären nach dem Schema:
+  - **Given** (Ausgangszustand)  
+  - **When** (Aktion)  
+  - **Then** (Erwartetes Ergebnis)
+- Saubere Struktur im Testordner  
 
-3. Raster-Startscreen (Kernfeature)
+### 8. Dokumentation parallel schreiben
+- Explizit festhalten, wo KI genutzt wurde  
+- Code kommentieren, warum Entscheidungen getroffen wurden  
+- UML-Use-Case erstellen  
+  - z. B. mit draw.io oder PlantUML  
 
-RecyclerView mit GridLayoutManager
+### 9. Plugins & Premium vorbereiten
+- Plugin-Interface definieren, noch ohne Implementierung  
+- Werbung und Premium nur als UI-Platzhalter  
 
-Dummy-Tools als Platzhalter
+### 10. Abgleich mit der Vorlesung
+- Tabelle aus der Vorlesung Punkt für Punkt abhaken  
+- Fehlende Punkte gezielt ergänzen  
+- Präsentation direkt aus der Dokumentation ableiten
 
-Drag & Drop zum Umsortieren (ItemTouchHelper)
-
-Persistenz der Reihenfolge (SharedPreferences oder DataStore)
-
-4. Erste echte Werkzeuge implementieren
-
-Reihenfolge empfohlen:
-
-Zähler
-
-Rechner
-
-Taschenlampe
-
-Begründung: wenig Sensorabhängigkeit, gut testbar.
-
-5. Einstellungen-Seite
-
-Darkmode umschaltbar
-
-Schriftgröße global
-
-Sprache vorbereiten (Strings.xml)
-
-Premium-Platzhalter
-
-6. Systemzugriffe kapseln
-
-Sensoren, Kamera, Audio strikt im Data-Layer
-
-Permissions zentral verwalten
-
-Fallbacks für nicht verfügbare Hardware
-
-7. Tests einführen
-
-Unit-Tests für Rechner und Zähler
-
-Test erklären (Given, When, Then)
-
-Testordner sauber strukturieren
-
-8. Dokumentation parallel schreiben
-
-Wo KI genutzt wurde explizit festhalten
-
-Code kommentieren, warum etwas so gebaut ist
-
-UML-Use-Case zeichnen (draw.io oder PlantUML)
-
-9. Plugins & Premium vorbereiten
-
-Plugin-Interface definieren (noch ohne Implementierung)
-
-Werbung, Premium nur als UI-Platzhalter
-
-10. Abgleich mit Vorlesung
-
-Tabelle Punkt für Punkt abhaken
-
-Fehlende Punkte gezielt ergänzen
-
-Präsentation daraus ableiten
