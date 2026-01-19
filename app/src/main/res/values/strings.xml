@@ -16,5 +16,6 @@
     <string name="voice_recorder">Sprachaufnahme</string>
     <string name="lumen_meter">Lumenmesser</string>
     <string name="camera">Kamera</string>
+    <string name="back">Zurück</string>
     <!-- Audiospektrum?? -->
 </resources>
