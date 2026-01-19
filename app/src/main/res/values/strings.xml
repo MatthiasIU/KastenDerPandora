@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">KastenDerPandora</string>
+    <string name="settings">Einstellungen</string>
+    <string name="plugins">Extras</string>
+    <string name="light">Lampe</string>
+    <string name="ruler">Lineal</string>
+    <string name="counter">Zähler</string>
+    <string name="clock">Uhr</string> <!--später untergliedern - mitunter Stoppuhr, timer, etc. -->
+    <string name="calculator">Rechner</string>
+    <string name="protractor">Winkelmesser</string>
+    <string name="spirit_level">Wasserwaage</string>
+    <string name="decibel_meter">Dezibelmesser</string>
+    <string name="compass">Kompas</string> <!-- mitunter gps/karte? -->
+    <string name="siren">Sirene</string>
+    <string name="magnifying_glass">Lupe</string>
+    <string name="voice_recorder">Sprachaufnahme</string>
+    <string name="lumen_meter">Lumenmesser</string>
+    <string name="camera">Kamera</string>
+    <!-- Audiospektrum?? -->
 </resources>
