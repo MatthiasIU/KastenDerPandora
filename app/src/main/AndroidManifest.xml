@@ -19,6 +19,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".LightActivity" />
+        <activity android:name=".RulerActivity" />
+        <activity android:name=".CounterActivity" />
+        <activity android:name=".ClockActivity" />
+        <activity android:name=".CalculatorActivity" />
+        <activity android:name=".ProtractorActivity" />
+        <activity android:name=".SpiritLevelActivity" />
+        <activity android:name=".DecibelMeterActivity" />
+        <activity android:name=".CompassActivity" />
+        <activity android:name=".SirenActivity" />
+        <activity android:name=".MagnifyingGlassActivity" />
+        <activity android:name=".VoiceRecorderActivity" />
+        <activity android:name=".LumenMeterActivity" />
+        <activity android:name=".CameraActivity" />
+        <activity android:name=".AudioSpectrumActivity" />
     </application>
 
 </manifest>
