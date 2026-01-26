@@ -18,4 +18,7 @@
     <string name="camera">Kamera</string>
     <string name="audio_spectrum">Audiospektrum</string>
     <string name="back">Zurück</string>
+    <string name="reset">Zurücksetzen</string>
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
 </resources>

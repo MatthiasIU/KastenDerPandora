@@ -8,9 +8,9 @@ class RulerActivity : BaseToolActivity() {
     override val toolTitle = R.string.ruler
 }
 
-class CounterActivity : BaseToolActivity() {
-    override val toolTitle = R.string.counter
-}
+//class CounterActivity : BaseToolActivity() {
+//    override val toolTitle = R.string.counter
+//}
 
 class ClockActivity : BaseToolActivity() {
     override val toolTitle = R.string.clock
