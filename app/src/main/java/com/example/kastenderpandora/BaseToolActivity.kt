@@ -1,12 +1,14 @@
 package com.example.kastenderpandora
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.kastenderpandora.utils.SwipeGestureDetector
 
 abstract class BaseToolActivity : AppCompatActivity() {
 
@@ -14,6 +16,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
     open val toolIcon: Int = R.drawable.ic_placeholder
     open val layoutResId: Int = R.layout.activity_tool_placeholder
     open val showBackButton: Boolean = true
+    open val enableSwipeBack: Boolean = false
+
+    private var swipeGestureDetector: SwipeGestureDetector? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +28,13 @@ abstract class BaseToolActivity : AppCompatActivity() {
         setupWindowInsets()
         setupHeader()
         setupBackButton()
+        setupSwipeGestures()
         setupToolContent()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        swipeGestureDetector?.onTouchEvent(ev)
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun setupWindowInsets() {
@@ -50,6 +61,15 @@ abstract class BaseToolActivity : AppCompatActivity() {
             }
         } else {
             backButton?.visibility = android.view.View.GONE
+        }
+    }
+
+    private fun setupSwipeGestures() {
+        if (enableSwipeBack) {
+            swipeGestureDetector = SwipeGestureDetector(
+                this,
+                onSwipeLeft = { onBackButtonPressed() }
+            )
         }
     }
 
