@@ -21,4 +21,5 @@
     <string name="reset">Zurücksetzen</string>
     <string name="increment">+</string>
     <string name="decrement">-</string>
+    <string name="tool_name">Tool Name</string>
 </resources>
