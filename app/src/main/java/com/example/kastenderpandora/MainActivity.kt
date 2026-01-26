@@ -3,7 +3,6 @@ package com.example.kastenderpandora
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,24 +13,24 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    data class Tool(val nameRes: Int, val activityClass: Class<*>)
+    data class Tool(val nameRes: Int, val activityClass: Class<*>, val icon: Int)
 
     private val tools = listOf(
-        Tool(R.string.light, LightActivity::class.java),
-        Tool(R.string.ruler, RulerActivity::class.java),
-        Tool(R.string.counter, CounterActivity::class.java),
-        Tool(R.string.clock, ClockActivity::class.java),
-        Tool(R.string.calculator, CalculatorActivity::class.java),
-        Tool(R.string.protractor, ProtractorActivity::class.java),
-        Tool(R.string.spirit_level, SpiritLevelActivity::class.java),
-        Tool(R.string.decibel_meter, DecibelMeterActivity::class.java),
-        Tool(R.string.compass, CompassActivity::class.java),
-        Tool(R.string.siren, SirenActivity::class.java),
-        Tool(R.string.magnifying_glass, MagnifyingGlassActivity::class.java),
-        Tool(R.string.voice_recorder, VoiceRecorderActivity::class.java),
-        Tool(R.string.lumen_meter, LumenMeterActivity::class.java),
-        Tool(R.string.camera, CameraActivity::class.java),
-        Tool(R.string.audio_spectrum, AudioSpectrumActivity::class.java)
+        Tool(R.string.light, LightActivity::class.java, R.mipmap.ic_light),
+        Tool(R.string.ruler, RulerActivity::class.java, R.mipmap.ic_ruler),
+        Tool(R.string.counter, CounterActivity::class.java, R.mipmap.ic_counter),
+        Tool(R.string.clock, ClockActivity::class.java, R.mipmap.ic_clock),
+        Tool(R.string.calculator, CalculatorActivity::class.java, R.mipmap.ic_calculator),
+        Tool(R.string.protractor, ProtractorActivity::class.java, R.mipmap.ic_protractor),
+        Tool(R.string.spirit_level, SpiritLevelActivity::class.java, R.mipmap.ic_spirit_level),
+        Tool(R.string.decibel_meter, DecibelMeterActivity::class.java, R.mipmap.ic_decibel_meter),
+        Tool(R.string.compass, CompassActivity::class.java, R.mipmap.ic_compass),
+        Tool(R.string.siren, SirenActivity::class.java, R.mipmap.ic_siren),
+        Tool(R.string.magnifying_glass, MagnifyingGlassActivity::class.java, R.mipmap.ic_magnifying_glass),
+        Tool(R.string.voice_recorder, VoiceRecorderActivity::class.java, R.mipmap.ic_voice_recorder),
+        Tool(R.string.lumen_meter, LumenMeterActivity::class.java, R.drawable.ic_placeholder),
+        Tool(R.string.camera, CameraActivity::class.java, R.drawable.ic_placeholder),
+        Tool(R.string.audio_spectrum, AudioSpectrumActivity::class.java, R.drawable.ic_placeholder)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             
             ivIcon.layoutParams.width = iconSize
             ivIcon.layoutParams.height = iconSize
-            ivIcon.setImageResource(R.drawable.ic_placeholder)
+            ivIcon.setImageResource(tool.icon)
             
             tvLabel.setText(tool.nameRes)
             

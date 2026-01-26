@@ -11,7 +11,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_placeholder"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -20,7 +20,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Tool Name"
+        android:text="@string/tool_name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
