@@ -1,8 +1,8 @@
 package com.example.kastenderpandora
 
-class LightActivity : BaseToolActivity() {
-    override val toolTitle = R.string.light
-}
+//class LightActivity : BaseToolActivity() {
+//    override val toolTitle = R.string.light
+//}
 
 class RulerActivity : BaseToolActivity() {
     override val toolTitle = R.string.ruler
