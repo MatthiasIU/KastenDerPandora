@@ -2,6 +2,7 @@
     <string name="app_name">KastenDerPandora</string>
     <string name="settings">Settings</string>
     <string name="plugins">Plugins</string>
+    <string name="language">Language</string>
     <string name="light">Light</string>
     <string name="ruler">Ruler</string>
     <string name="counter">Counter</string>
@@ -21,4 +22,6 @@
     <string name="reset">Reset</string>
     <string name="increment">+</string>
     <string name="decrement">-</string>
+    <string name="tool_name">Werkzeug Name</string>
+    <string name="darkmode">Dunkler Modus</string>
 </resources>

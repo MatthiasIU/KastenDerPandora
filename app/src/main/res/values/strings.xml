@@ -2,6 +2,7 @@
     <string name="app_name">KastenDerPandora</string>
     <string name="settings">Einstellungen</string>
     <string name="plugins">Extras</string>
+    <string name="language">Sprache</string>
     <string name="light">Lampe</string>
     <string name="ruler">Lineal</string>
     <string name="counter">Zähler</string>
@@ -22,4 +23,5 @@
     <string name="increment">+</string>
     <string name="decrement">-</string>
     <string name="tool_name">Tool Name</string>
+    <string name="darkmode">Darkmode</string>
 </resources>
