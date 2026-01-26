@@ -1,25 +1,46 @@
 <resources>
     <string name="app_name">KastenDerPandora</string>
+    
+    <!-- Common -->
     <string name="settings">Einstellungen</string>
     <string name="plugins">Extras</string>
+    <string name="back">Zurück</string>
+    <string name="reset">Zurücksetzen</string>
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
+    
+    <!-- Tools -->
     <string name="light">Lampe</string>
     <string name="ruler">Lineal</string>
     <string name="counter">Zähler</string>
-    <string name="clock">Uhr</string> <!--später untergliedern - mitunter Stoppuhr, timer, etc. -->
+    <string name="clock">Uhr</string>
     <string name="calculator">Rechner</string>
     <string name="protractor">Winkelmesser</string>
     <string name="spirit_level">Wasserwaage</string>
     <string name="decibel_meter">Dezibelmesser</string>
-    <string name="compass">Kompas</string> <!-- mitunter gps/karte? -->
+    <string name="compass">Kompass</string>
     <string name="siren">Sirene</string>
     <string name="magnifying_glass">Lupe</string>
     <string name="voice_recorder">Sprachaufnahme</string>
     <string name="lumen_meter">Lumenmesser</string>
     <string name="camera">Kamera</string>
     <string name="audio_spectrum">Audiospektrum</string>
-    <string name="back">Zurück</string>
-    <string name="reset">Zurücksetzen</string>
-    <string name="increment">+</string>
-    <string name="decrement">-</string>
-    <string name="tool_name">Tool Name</string>
+    
+    <!-- Light Tool -->
+    <string name="light_turn_on">Einschalten</string>
+    <string name="light_turn_off">Ausschalten</string>
+    
+    <!-- Settings -->
+    <string name="settings_language">Sprache</string>
+    <string name="settings_theme">Design</string>
+    <string name="settings_save">Speichern</string>
+    
+    <!-- Placeholders -->
+    <string name="tool_name">Tool</string>
+    
+    <!-- Plurals -->
+    <plurals name="tools_available">
+        <item quantity="one">%d Werkzeug verfügbar</item>
+        <item quantity="other">%d Werkzeuge verfügbar</item>
+    </plurals>
 </resources>
