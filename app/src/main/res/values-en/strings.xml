@@ -1,24 +1,46 @@
 <resources>
     <string name="app_name">KastenDerPandora</string>
+    
+    <!-- Common -->
     <string name="settings">Settings</string>
     <string name="plugins">Plugins</string>
+    <string name="back">Back</string>
+    <string name="reset">Reset</string>
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
+    
+    <!-- Tools -->
     <string name="light">Light</string>
     <string name="ruler">Ruler</string>
     <string name="counter">Counter</string>
-    <string name="clock">Clock</string> <!--später untergliedern - mitunter Stoppuhr, timer, etc. -->
+    <string name="clock">Clock</string>
     <string name="calculator">Calculator</string>
     <string name="protractor">Protractor</string>
     <string name="spirit_level">Spirit Level</string>
     <string name="decibel_meter">Decibel Meter</string>
-    <string name="compass">Compass</string> <!-- mitunter gps/karte? -->
+    <string name="compass">Compass</string>
     <string name="siren">Siren</string>
     <string name="magnifying_glass">Magnifying Glass</string>
     <string name="voice_recorder">Voice Recorder</string>
     <string name="lumen_meter">Lumen Meter</string>
     <string name="camera">Camera</string>
     <string name="audio_spectrum">Audio Spectrometer</string>
-    <string name="back">Back</string>
-    <string name="reset">Reset</string>
-    <string name="increment">+</string>
-    <string name="decrement">-</string>
+    
+    <!-- Light Tool -->
+    <string name="light_turn_on">Turn ON</string>
+    <string name="light_turn_off">Turn OFF</string>
+    
+    <!-- Settings -->
+    <string name="settings_language">Language</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_save">Save</string>
+    
+    <!-- Placeholders -->
+    <string name="tool_name">Tool</string>
+    
+    <!-- Plurals -->
+    <plurals name="tools_available">
+        <item quantity="one">%d tool available</item>
+        <item quantity="other">%d tools available</item>
+    </plurals>
 </resources>
