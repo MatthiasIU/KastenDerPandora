@@ -27,11 +27,19 @@
 
     <!-- Decibel Meter -->
     <string name="db_initial">0 dB</string>
-    <string name="db_range_1">Leise Umgebung (000 – 045db)</string>
-    <string name="db_range_2">Zimmerlautstärke (045 – 060db)</string>
-    <string name="db_range_3">Lauter Arbeitsplatz (060 – 080db)</string>
-    <string name="db_range_4">Gefährliche Lautstärke (080 – 115db)</string>
-    <string name="db_range_5">Extrem gefährliche Lautstärke (115 – 140db)</string>
+    <string name="db_current">%1$d dB</string>
+
+    <string name="db_range_1">Leise Umgebung (000 – 045 dB)</string>
+    <string name="db_range_2">Zimmerlautstärke (045 – 060 dB)</string>
+    <string name="db_range_3">Lauter Arbeitsplatz (060 – 080 dB)</string>
+    <string name="db_range_4">Gefährliche Lautstärke (080 – 115 dB)</string>
+    <string name="db_range_5">Extrem gefährliche Lautstärke (115 – 140 dB)</string>
+
+    <string name="db_stats">
+        db_min: %1$d dB\n
+        db_max: %2$d dB\n
+        avg (10s): %3$d dB
+    </string>
 
     <!-- Counter -->
     <string name="reset">Zurücksetzen</string>

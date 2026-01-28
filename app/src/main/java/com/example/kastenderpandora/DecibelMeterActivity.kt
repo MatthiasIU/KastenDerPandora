@@ -136,7 +136,10 @@ class DecibelMeterActivity : BaseToolActivity() {
     }
 
     private fun updateUi(db: Float) {
-        tvCurrentDb.text = "${db.toInt()} dB"
+        tvCurrentDb.text = getString(
+            R.string.db_current,
+            db.toInt()
+        )
 
         val now = System.currentTimeMillis()
         dbWindow.addLast(now to db)
@@ -146,14 +149,16 @@ class DecibelMeterActivity : BaseToolActivity() {
         }
 
         val values = dbWindow.map { it.second }
-        val min = values.minOrNull() ?: 0f
-        val max = values.maxOrNull() ?: 0f
-        val avg = if (values.isNotEmpty()) values.average() else 0.0
+        val min = values.minOrNull()?.toInt() ?: 0
+        val max = values.maxOrNull()?.toInt() ?: 0
+        val avg = if (values.isNotEmpty()) values.average().toInt() else 0
 
-        tvStats.text =
-            "db_min: ${min.toInt()} dB\n" +
-                    "db_max: ${max.toInt()} dB\n" +
-                    "avg (10s): ${avg.toInt()} dB"
+        tvStats.text = getString(
+            R.string.db_stats,
+            min,
+            max,
+            avg
+        )
 
         highlightRange(db)
     }

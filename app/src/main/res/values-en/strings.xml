@@ -28,11 +28,17 @@
 
     <!-- Decibel Meter -->
     <string name="db_initial">0 dB</string>
+    <string name="db_current">%1$d dB</string>
     <string name="db_range_1">Quiet Environment (000 – 045db)</string>
     <string name="db_range_2">Indoor Noise (045 – 060db)</string>
     <string name="db_range_3">Loud Workplace (060 – 080db)</string>
     <string name="db_range_4">Dangerous Volume (080 – 115db)</string>
     <string name="db_range_5">Extremely Dangerous Volume (115 – 140db)</string>
+    <string name="db_stats">
+        db_min: %1$d dB\n
+        db_max: %2$d dB\n
+        avg (10s): %3$d dB
+    </string>
 
     <!-- Counter -->
     <string name="reset">Zurücksetzen</string>
