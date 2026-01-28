@@ -8,14 +8,17 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.kastenderpandora.i18n.LanguageManager
-import androidx.core.content.edit
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
 
     private var currentLanguage: String? = null
+    private var currentDarkMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +26,6 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         currentLanguage = LanguageManager.getCurrentLanguage(this)
-        android.util.Log.d("SettingsActivity", "Current language: $currentLanguage")
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.settings_main)) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,7 +34,9 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         setupLanguageSelector()
+        setupDarkModeSwitch()
         setupSaveButton()
+        setupResetButton()
         setupBackButton()
     }
 
@@ -71,12 +75,47 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupDarkModeSwitch() {
+        val prefs = getSharedPreferences(PandoraApplication.PREFS_NAME, MODE_PRIVATE)
+        val sw = findViewById<SwitchMaterial>(R.id.switchDarkMode)
+
+        currentDarkMode = prefs.getBoolean(PandoraApplication.KEY_DARKMODE, false)
+        sw.isChecked = currentDarkMode
+
+        sw.setOnCheckedChangeListener { _, isChecked ->
+            currentDarkMode = isChecked
+        }
+    }
+
+    private fun saveSettings() {
+        val prefs = getSharedPreferences(PandoraApplication.PREFS_NAME, MODE_PRIVATE)
+        prefs.edit(commit = true) {
+            if (currentLanguage == null) remove(PandoraApplication.KEY_LANGUAGE)
+            else putString(PandoraApplication.KEY_LANGUAGE, currentLanguage)
+
+            putBoolean(PandoraApplication.KEY_DARKMODE, currentDarkMode)
+        }
+
+        AppCompatDelegate.setDefaultNightMode(
+            if (currentDarkMode) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+        )
+    }
+
+
     private fun setupSaveButton() {
-        val saveButton = findViewById<Button>(R.id.btnSave)
-        saveButton.setOnClickListener {
-            currentLanguage?.let { lang ->
-                changeLanguage(lang)
-            }
+        findViewById<Button>(R.id.btnSave).setOnClickListener {
+            saveSettings()
+            restartToMain()
+        }
+    }
+
+    private fun setupResetButton() {
+        findViewById<Button>(R.id.btnReset).setOnClickListener {
+            currentLanguage = null
+            currentDarkMode = false
+            saveSettings()
+            restartToMain()
         }
     }
 
@@ -101,5 +140,12 @@ class SettingsActivity : AppCompatActivity() {
         finish()
         
         android.util.Log.d("SettingsActivity", "Language change complete, restarting app")
+    }
+
+    private fun restartToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }
