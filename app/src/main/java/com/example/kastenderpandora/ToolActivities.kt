@@ -28,9 +28,9 @@ class SpiritLevelActivity : BaseToolActivity() {
     override val toolTitle = R.string.spirit_level
 }
 
-class DecibelMeterActivity : BaseToolActivity() {
-    override val toolTitle = R.string.decibel_meter
-}
+//class DecibelMeterActivity : BaseToolActivity() {
+//    override val toolTitle = R.string.decibel_meter
+//}
 
 class CompassActivity : BaseToolActivity() {
     override val toolTitle = R.string.compass
