@@ -2,6 +2,7 @@ package com.example.kastenderpandora
 
 import android.app.Application
 import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatDelegate
 import java.util.Locale
 import com.example.kastenderpandora.i18n.I18n
 
@@ -10,11 +11,22 @@ class PandoraApplication : Application() {
     companion object {
         const val PREFS_NAME = "AppPrefs"
         const val KEY_LANGUAGE = "language"
+        const val KEY_DARKMODE = "darkmode"
         var currentLocale: Locale? = null
     }
 
     override fun onCreate() {
         super.onCreate()
+
+        // Darkmode anwenden (AppCompatDelegate ist der Standardweg für Views)
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val darkMode = prefs.getBoolean(KEY_DARKMODE, false)
+
+        AppCompatDelegate.setDefaultNightMode(
+            if (darkMode) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+        )
+
         I18n.init(this)
     }
 
