@@ -6,16 +6,22 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import com.google.android.material.slider.Slider
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.kastenderpandora.i18n.LanguageManager
-import androidx.core.content.edit
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
 
     private var currentLanguage: String? = null
+    private var currentDarkMode: Boolean = false
+    private var currentGridColumns: Int = PandoraApplication.DEFAULT_GRID_COLUMNS
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +29,6 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         currentLanguage = LanguageManager.getCurrentLanguage(this)
-        android.util.Log.d("SettingsActivity", "Current language: $currentLanguage")
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.settings_main)) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,7 +37,10 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         setupLanguageSelector()
+        setupDarkModeSwitch()
+        setupGridSlider()
         setupSaveButton()
+        setupResetButton()
         setupBackButton()
     }
 
@@ -71,12 +79,59 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupDarkModeSwitch() {
+        val prefs = getSharedPreferences(PandoraApplication.PREFS_NAME, MODE_PRIVATE)
+        val sw = findViewById<SwitchMaterial>(R.id.switchDarkMode)
+
+        currentDarkMode = prefs.getBoolean(PandoraApplication.KEY_DARKMODE, false)
+        sw.isChecked = currentDarkMode
+
+        sw.setOnCheckedChangeListener { _, isChecked ->
+            currentDarkMode = isChecked
+        }
+    }
+
+    private fun setupGridSlider() {
+        val prefs = getSharedPreferences(PandoraApplication.PREFS_NAME, MODE_PRIVATE)
+
+        val slider = findViewById<Slider>(R.id.sliderGridColumns)
+        val tvValue = findViewById<TextView>(R.id.tvGridValue)
+
+        // aus Prefs laden (sonst Default 4)
+        currentGridColumns = prefs.getInt(
+            PandoraApplication.KEY_GRID_COLUMNS,
+            PandoraApplication.DEFAULT_GRID_COLUMNS
+        )
+
+        // UI initial setzen
+        slider.value = currentGridColumns.toFloat()
+        tvValue.text = currentGridColumns.toString()
+
+        // UI live aktualisieren, aber NICHT speichern
+        slider.addOnChangeListener { _, value, _ ->
+            currentGridColumns = value.toInt()
+            tvValue.text = currentGridColumns.toString()
+        }
+    }
+
     private fun setupSaveButton() {
-        val saveButton = findViewById<Button>(R.id.btnSave)
-        saveButton.setOnClickListener {
-            currentLanguage?.let { lang ->
-                changeLanguage(lang)
-            }
+        findViewById<Button>(R.id.btnSave).setOnClickListener {
+            saveSettings()
+            restartToMain()
+        }
+    }
+
+    private fun setupResetButton() {
+        findViewById<Button>(R.id.btnReset).setOnClickListener {
+            currentLanguage = null
+            currentDarkMode = false
+
+            currentGridColumns = PandoraApplication.DEFAULT_GRID_COLUMNS
+            findViewById<Slider>(R.id.sliderGridColumns).value = currentGridColumns.toFloat()
+            findViewById<TextView>(R.id.tvGridValue).text = currentGridColumns.toString()
+
+            saveSettings()
+            restartToMain()
         }
     }
 
@@ -101,5 +156,30 @@ class SettingsActivity : AppCompatActivity() {
         finish()
         
         android.util.Log.d("SettingsActivity", "Language change complete, restarting app")
+    }
+
+    private fun saveSettings() {
+        val prefs = getSharedPreferences(PandoraApplication.PREFS_NAME, MODE_PRIVATE)
+        prefs.edit(commit = true) {
+            if (currentLanguage == null) remove(PandoraApplication.KEY_LANGUAGE)
+            else putString(PandoraApplication.KEY_LANGUAGE, currentLanguage)
+
+            putBoolean(PandoraApplication.KEY_DARKMODE, currentDarkMode)
+
+            // GRID speichern
+            putInt(PandoraApplication.KEY_GRID_COLUMNS, currentGridColumns)
+        }
+
+        AppCompatDelegate.setDefaultNightMode(
+            if (currentDarkMode) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+        )
+    }
+
+    private fun restartToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }
