@@ -9,6 +9,12 @@
     <string name="light">Light</string>
     <string name="ruler">Ruler</string>
     <string name="counter">Counter</string>
+    <string name="alarm">Alarm</string>
+    <string name="stopwatch">Stopwatch</string>
+    <string name="timer">Timer</string>
+    <string name="no_alarms_set">No alarms set</string>
+    <string name="start">Start</string>
+    <string name="default_time">00:00:00</string>
     <string name="clock">Clock</string> <!--später untergliedern - mitunter Stoppuhr, timer, etc. -->
     <string name="calculator">Calculator</string>
     <string name="protractor">Protractor</string>
@@ -47,6 +53,8 @@
 
     <!-- Settings -->
     <string name="settings_language">Language</string>
+    <string name="settings_darkmode">Darkmode</string>
+    <string name="settings_home_grid_columns">Grid-Columns</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_save">Save</string>
 

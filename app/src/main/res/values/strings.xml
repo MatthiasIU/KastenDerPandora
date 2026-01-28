@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">KastenDerPandora</string>
+    
+    <!-- Common -->
     <string name="settings">Einstellungen</string>
     <string name="plugins">Extras</string>
     <string name="back">Zurück</string>
@@ -8,7 +10,13 @@
     <string name="light">Lampe</string>
     <string name="ruler">Lineal</string>
     <string name="counter">Zähler</string>
-    <string name="clock">Uhr</string> <!--später untergliedern - mitunter Stoppuhr, timer, etc. -->
+    <string name="clock">Uhr</string>
+    <string name="alarm">Alarm</string>
+    <string name="stopwatch">Stoppuhr</string>
+    <string name="timer">Timer</string>
+    <string name="no_alarms_set">Keine Wecker eingestellt</string>
+    <string name="start">Start</string>
+    <string name="default_time">00:00:00</string>
     <string name="calculator">Rechner</string>
     <string name="protractor">Winkelmesser</string>
     <string name="spirit_level">Wasserwaage</string>
@@ -48,12 +56,14 @@
 
     <!-- Settings -->
     <string name="settings_language">Sprache</string>
+    <string name="settings_darkmode">Dunkler Modus</string>
+    <string name="settings_home_grid_columns">Raster-Spalten</string>
     <string name="settings_theme">Design</string>
     <string name="settings_save">Speichern</string>
-
+    
     <!-- Placeholders -->
     <string name="tool_name">Tool</string>
-
+    
     <!-- Plurals -->
     <plurals name="tools_available">
         <item quantity="one">%d Werkzeug verfügbar</item>
