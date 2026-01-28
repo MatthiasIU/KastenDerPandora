@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="@id/tvDarkModeLabel"
         app:layout_constraintBottom_toBottomOf="@id/tvDarkModeLabel" />
 
-    <!-- Grid Spalten -->
+    <!-- Grid Spalten (Überschrift + aktueller Wert in einer Zeile) -->
     <TextView
         android:id="@+id/tvGridLabel"
         android:layout_width="wrap_content"
@@ -68,32 +68,37 @@
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/switchDarkMode"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.slider.Slider
-        android:id="@+id/sliderGridColumns"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:valueFrom="2"
-        android:valueTo="6"
-        android:stepSize="1"
-        android:value="@integer/home_grid_columns_default"
-        app:layout_constraintTop_toBottomOf="@id/tvGridLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/tvGridValue"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_bias="0" />
 
     <TextView
         android:id="@+id/tvGridValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="12dp"
         android:text="@integer/home_grid_columns_default"
-        app:layout_constraintTop_toBottomOf="@id/sliderGridColumns"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/tvGridLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnSave" />
+        app:layout_constraintTop_toTopOf="@id/tvGridLabel"
+        app:layout_constraintBottom_toBottomOf="@id/tvGridLabel" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderGridColumns"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:valueFrom="2"
+        android:valueTo="6"
+        android:stepSize="1"
+        android:value="@integer/home_grid_columns_default"
+        app:layout_constraintTop_toBottomOf="@id/tvGridLabel"
+        app:layout_constraintBottom_toTopOf="@id/btnSave"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Speichern + Zurücksetzen -->
     <Button
