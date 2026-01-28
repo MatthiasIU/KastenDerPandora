@@ -1,6 +1,8 @@
 package com.example.kastenderpandora
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.GridLayout
@@ -10,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,17 +85,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        val prefs = newBase.getSharedPreferences(PandoraApplication.PREFS_NAME, MODE_PRIVATE)
+        val savedLanguage = prefs.getString(PandoraApplication.KEY_LANGUAGE, null)
+
+        if (savedLanguage != null) {
+            val config = Configuration(newBase.resources.configuration)
+            val locale = Locale.forLanguageTag(savedLanguage)
+            config.setLocale(locale)
+
+            val newContext = newBase.createConfigurationContext(config)
+            super.attachBaseContext(newContext)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     private fun calculateDynamicIconSize(columns: Int): Int {
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        val padding = (32 * displayMetrics.density).toInt() // Total horizontal padding in activity_main + grid margins
+        val padding = (32 * displayMetrics.density).toInt()
         val availableWidth = screenWidth - padding
         val itemWidth = availableWidth / columns
         
-        // Icon should be about 60% of the item width, but capped at a reasonable size (e.g. 96dp)
         val maxIconSize = (96 * displayMetrics.density).toInt()
         val targetSize = (itemWidth * 0.6).toInt()
         
-        return Math.min(targetSize, maxIconSize)
+        return targetSize.coerceAtMost(maxIconSize)
     }
 }
