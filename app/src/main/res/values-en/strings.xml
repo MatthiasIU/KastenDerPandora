@@ -32,6 +32,8 @@
     
     <!-- Settings -->
     <string name="settings_language">Language</string>
+    <string name="settings_darkmode">Darkmode</string>
+    <string name="settings_home_grid_columns">Grid-Columns</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_save">Save</string>
     
