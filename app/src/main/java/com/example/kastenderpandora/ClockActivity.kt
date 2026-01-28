@@ -1,12 +1,9 @@
 package com.example.kastenderpandora
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.TextView
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ClockActivity : BaseToolActivity() {
 
@@ -14,38 +11,46 @@ class ClockActivity : BaseToolActivity() {
     override val toolIcon = R.mipmap.ic_clock
     override val layoutResId = R.layout.activity_clock
 
-    private lateinit var tvTime: TextView
-    private lateinit var tvDate: TextView
-    private lateinit var handler: Handler
-    private lateinit var timeRunnable: Runnable
-    private val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-    private val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        tvTime = findViewById(R.id.tvTime)
-        tvDate = findViewById(R.id.tvDate)
+        bottomNavigationView = findViewById(R.id.bottomNavigation)
+        setupBottomNavigation()
         
-        handler = Handler(Looper.getMainLooper())
-        timeRunnable = object : Runnable {
-            override fun run() {
-                updateTime()
-                handler.postDelayed(this, 1000)
+        if (savedInstanceState == null) {
+            bottomNavigationView.selectedItemId = R.id.nav_clock
+        }
+    }
+
+    private fun setupBottomNavigation() {
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_clock -> {
+                    loadFragment(ClockFragment())
+                    true
+                }
+                R.id.nav_alarm -> {
+                    loadFragment(AlarmFragment())
+                    true
+                }
+                R.id.nav_stopwatch -> {
+                    loadFragment(StopwatchFragment())
+                    true
+                }
+                R.id.nav_timer -> {
+                    loadFragment(TimerFragment())
+                    true
+                }
+                else -> false
             }
         }
-
-        handler.post(timeRunnable)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        handler.removeCallbacks(timeRunnable)
-    }
-
-    private fun updateTime() {
-        val now = Date()
-        tvTime.text = timeFormat.format(now)
-        tvDate.text = dateFormat.format(now)
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }
