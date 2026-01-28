@@ -12,6 +12,8 @@ class PandoraApplication : Application() {
         const val PREFS_NAME = "AppPrefs"
         const val KEY_LANGUAGE = "language"
         const val KEY_DARKMODE = "darkmode"
+        const val KEY_GRID_COLUMNS = "home_grid_columns_default"
+        const val DEFAULT_GRID_COLUMNS = 4
         var currentLocale: Locale? = null
     }
 
