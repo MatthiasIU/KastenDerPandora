@@ -20,9 +20,9 @@ class CalculatorActivity : BaseToolActivity() {
     override val toolTitle = R.string.calculator
 }
 
-class ProtractorActivity : BaseToolActivity() {
-    override val toolTitle = R.string.protractor
-}
+//class ProtractorActivity : BaseToolActivity() {
+//    override val toolTitle = R.string.protractor
+//}
 
 //class SpiritLevelActivity : BaseToolActivity() {
 //    override val toolTitle = R.string.spirit_level
