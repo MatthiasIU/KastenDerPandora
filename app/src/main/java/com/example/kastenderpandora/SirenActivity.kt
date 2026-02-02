@@ -49,6 +49,7 @@ class SirenActivity : BaseToolActivity() {
         super.onCreate(savedInstanceState)
 
         setupViews()
+        initializeDisplayValues()
         setupListeners()
         updateUI()
     }
@@ -61,6 +62,11 @@ class SirenActivity : BaseToolActivity() {
         seekBarFrequency = findViewById(R.id.seekBarFrequency)
         tvVolumeValue = findViewById(R.id.tvVolumeValue)
         tvFrequencyValue = findViewById(R.id.tvFrequencyValue)
+    }
+
+    private fun initializeDisplayValues() {
+        tvVolumeValue.text = getString(R.string.siren_volume_value, seekBarVolume.progress)
+        tvFrequencyValue.text = getString(R.string.siren_frequency_value, seekBarFrequency.progress)
     }
 
     private fun setupListeners() {
