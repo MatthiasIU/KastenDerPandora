@@ -32,9 +32,9 @@ class CalculatorActivity : BaseToolActivity() {
 //    override val toolTitle = R.string.decibel_meter
 //}
 
-class CompassActivity : BaseToolActivity() {
-    override val toolTitle = R.string.compass
-}
+//class CompassActivity : BaseToolActivity() {
+//    override val toolTitle = R.string.compass
+//}
 
 class MagnifyingGlassActivity : BaseToolActivity() {
     override val toolTitle = R.string.magnifying_glass
