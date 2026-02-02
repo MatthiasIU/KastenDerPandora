@@ -24,9 +24,9 @@ class ProtractorActivity : BaseToolActivity() {
     override val toolTitle = R.string.protractor
 }
 
-class SpiritLevelActivity : BaseToolActivity() {
-    override val toolTitle = R.string.spirit_level
-}
+//class SpiritLevelActivity : BaseToolActivity() {
+//    override val toolTitle = R.string.spirit_level
+//}
 
 //class DecibelMeterActivity : BaseToolActivity() {
 //    override val toolTitle = R.string.decibel_meter

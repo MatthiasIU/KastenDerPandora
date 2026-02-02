@@ -64,6 +64,10 @@
     <string name="increment">+</string>
     <string name="decrement">-</string>
 
+    <!-- Spirit Level-->
+    <string name="level_status_flat">Level</string>
+    <string name="level_angle_label">%1$d°</string>
+
     <!-- Settings -->
     <string name="settings_language">Language</string>
     <string name="settings_darkmode">Darkmode</string>
