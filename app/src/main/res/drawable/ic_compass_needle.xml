@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Außenring -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#90A4AE"
+        android:strokeWidth="1"
+        android:pathData="M12,2a10,10 0 1,1 0,20a10,10 0 1,1 0,-20z" />
+
+    <!-- Nordspitze (rot) -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M12,2 L16.5,12 L12,10.2 L7.5,12 Z" />
+
+    <!-- Südspitze (dunkel) -->
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M12,22 L16.5,12 L12,13.8 L7.5,12 Z" />
+
+    <!-- Mittelpunkt -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,10.75c0.69,0 1.25,0.56 1.25,1.25S12.69,13.25 12,13.25 10.75,12.69 10.75,12 11.31,10.75 12,10.75z" />
+
+</vector>
