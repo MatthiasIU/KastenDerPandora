@@ -36,10 +36,6 @@ class CompassActivity : BaseToolActivity() {
     override val toolTitle = R.string.compass
 }
 
-class SirenActivity : BaseToolActivity() {
-    override val toolTitle = R.string.siren
-}
-
 class MagnifyingGlassActivity : BaseToolActivity() {
     override val toolTitle = R.string.magnifying_glass
 }
