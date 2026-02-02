@@ -32,6 +32,19 @@
     <string name="light_turn_on">Turn ON</string>
     <string name="light_turn_off">Turn OFF</string>
 
+    <!-- Siren Tool -->
+    <string name="siren_start">Start Siren</string>
+    <string name="siren_stop">Stop Siren</string>
+    <string name="siren_status_off">Siren off</string>
+    <string name="siren_status_on">Siren on</string>
+    <string name="siren_pattern">Pattern</string>
+    <string name="siren_pattern_loud">Loud Tone</string>
+    <string name="siren_pattern_sos">SOS</string>
+    <string name="siren_volume">Volume</string>
+    <string name="siren_frequency">Frequency</string>
+    <string name="siren_volume_value">%1$d%%</string>
+    <string name="siren_frequency_value">%1$d Hz</string>
+
     <!-- Decibel Meter -->
     <string name="db_initial">0 dB</string>
     <string name="db_current">%1$d dB</string>

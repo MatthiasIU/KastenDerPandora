@@ -53,32 +53,41 @@ class MainActivity : AppCompatActivity() {
         val columns = UiConfig.getHomeGridColumns(this)
         grid.columnCount = columns
 
-        val inflater = LayoutInflater.from(this)
-        val iconSize = calculateDynamicIconSize(columns)
+        grid.removeAllViews() // sicherheitshalber
 
-        tools.forEach { tool ->
-            val itemView = inflater.inflate(R.layout.grid_item_tool, grid, false)
-            
-            val ivIcon = itemView.findViewById<ImageView>(R.id.ivIcon)
-            val tvLabel = itemView.findViewById<TextView>(R.id.tvLabel)
-            
-            ivIcon.layoutParams.width = iconSize
-            ivIcon.layoutParams.height = iconSize
-            ivIcon.setImageResource(tool.icon)
-            
-            tvLabel.setText(tool.nameRes)
-            
-            itemView.layoutParams = GridLayout.LayoutParams().apply {
-                width = 0
-                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+        val inflater = LayoutInflater.from(this)
+
+        grid.post {
+            val gapPx = dpToPx(8f)
+            val iconSize = calculateDynamicIconSize(grid, columns, gapPx)
+
+            tools.forEach { tool ->
+                val itemView = inflater.inflate(R.layout.grid_item_tool, grid, false)
+
+                val ivIcon = itemView.findViewById<ImageView>(R.id.ivIcon)
+                val tvLabel = itemView.findViewById<TextView>(R.id.tvLabel)
+
+                ivIcon.layoutParams.width = iconSize
+                ivIcon.layoutParams.height = iconSize
+                ivIcon.setImageResource(tool.icon)
+
+                tvLabel.setText(tool.nameRes)
+                tvLabel.textSize = if (columns >= 5) 11f else 12f
+
+                itemView.layoutParams = GridLayout.LayoutParams().apply {
+                    width = 0
+                    columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                    setMargins(gapPx / 2, gapPx / 2, gapPx / 2, gapPx / 2)
+                }
+
+                itemView.setOnClickListener {
+                    startActivity(Intent(this, tool.activityClass))
+                }
+
+                grid.addView(itemView)
             }
-            
-            itemView.setOnClickListener {
-                startActivity(Intent(this, tool.activityClass))
-            }
-            
-            grid.addView(itemView)
         }
+
 
         settings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
@@ -101,16 +110,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateDynamicIconSize(columns: Int): Int {
-        val displayMetrics = resources.displayMetrics
-        val screenWidth = displayMetrics.widthPixels
-        val padding = (32 * displayMetrics.density).toInt()
-        val availableWidth = screenWidth - padding
-        val itemWidth = availableWidth / columns
-        
-        val maxIconSize = (96 * displayMetrics.density).toInt()
-        val targetSize = (itemWidth * 0.6).toInt()
-        
-        return targetSize.coerceAtMost(maxIconSize)
+    private fun calculateDynamicIconSize(grid: GridLayout, columns: Int, gapPx: Int): Int {
+        val availableWidth = grid.width - grid.paddingLeft - grid.paddingRight - (gapPx * (columns - 1))
+        val itemWidth = (availableWidth / columns).coerceAtLeast(1)
+
+        val target = (itemWidth * 0.60f).toInt()
+        val min = dpToPx(48f)
+        val max = dpToPx(96f)
+
+        return target.coerceIn(min, max)
     }
+
+    private fun dpToPx(dp: Float): Int {
+        val dm = resources.displayMetrics
+        return (dp * dm.density + 0.5f).toInt()
+    }
+
 }
