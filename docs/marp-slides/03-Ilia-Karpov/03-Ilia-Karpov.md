@@ -283,6 +283,6 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 **Fragen?**
 
 **Kontakt:**
-- Johannes Lehmann: johanneslehmann19@gmail.com
+- Johannes Lehmann: johannes.lehmann@iu-study.org
 - Matthias Reps: matthias.reps@iu-study.org
 - Ilia Karpov: ilia.karpov.96@gmail.com
