@@ -17,11 +17,11 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 
 ### Matthias' Fokusbereiche
 **Hauptbeiträge:**
-- Counter Tool Implementierung
+- Counter Tool (Zähler)
 - Light Tool (Taschenlampe)
-- Internationalization (I18n) System
 - Decibel Meter (Dezibelmesser)
 - Spirit Level (Wasserwaage)
+- Internationalization (I18n) System
 
 **Ziel:**
 - Konkrete Funktionalität implementieren
@@ -30,12 +30,14 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
 ### Counter Tool
 **Zähler-Implementierung:**
 - Inkrement/Dekrement Buttons
 - Großes Zahlen-Display (120sp)
 - Reset-Funktionalität
 - Double-Tap zum Reset
+![bg left h:80%](https://imgur.com/FvcR1wq.png)
 
 **UX-Features:**
 - GestureDetector für Double-Tap
@@ -45,7 +47,8 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 
 ---
 
-### Counter - Technical Details
+<style scoped> li { font-size: 22px; } </style>
+### Counter<br>Technical Details
 **Technische Aspekte:**
 - State Management in Activity
 - OnClickListener Setup
@@ -56,9 +59,27 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Double-Tap vs. Single-Tap Unterscheidung
 - Performanz bei schnellen Klicks
 - Layout in verschiedenen Bildschirmgrößen
+  ![bg left h:80%](https://imgur.com/ojClfun.png)
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
+### Counter UI Layout
+**Activity Counter Layout:**
+- Grid für +/- Buttons (50/50 Split)
+- Centered TextView für Counter (0)
+- Reset-Button über Mitte
+- Bottom-Alignment für Bedienelemente
+
+**Layout-Hierarchie:**
+- ConstraintLayout als Root
+- Guideline für vertikale Mitte
+- Responsive Breite via Constraints
+  ![bg left h:60%](https://imgur.com/yL1Xuyy.png)
+
+---
+
+<style scoped> li { font-size: 22px; } </style>
 ### Light Tool (Taschenlampe)
 **Flashlight-Implementierung:**
 - CameraManager API
@@ -70,9 +91,11 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Auto-Ausschalten in onPause()
 - Exception Handling für Kamera
 - User Feedback (Farbwechsel)
+![bg left h:80%](https://imgur.com/iSqgKcw.png)
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
 ### Light - Camera Handling
 **Kamera-Integration:**
 - CAMERA_SERVICE Zugriff
@@ -83,9 +106,26 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - EIN: Blauer Hintergrund, weißer Text
 - AUS: Grauer Hintergrund, schwarzer Text
 - Smooth Transition zwischen States
+![bg left h:80%](https://imgur.com/F3Azi1M.png)
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
+### Light UI Layout
+**Activity Light Layout:**
+- **Circular Toggle:** Zentraler 200dp Button (Material3 Tonal)
+- **Status Text:** Subtile Beschriftung unter dem Button (60% Opazität)
+- **Alignment:** Vertikal und horizontal mittig zentriert
+
+**Layout-Hierarchie:**
+- **ConstraintLayout** (Root mit 16dp Padding)
+- **Header** (Top-Alignment)
+- **Button** (Circular Shape via ShapeAppearance)
+![bg left h:60%](https://imgur.com/jVEOaf2.png)
+  
+---
+
+<style scoped> li { font-size: 22px; } </style>
 ### Decibel Meter (Teil 1)
 **Dezibelmesser-Konzept:**
 - AudioRecord für Mikrofon-Aufnahme
@@ -97,9 +137,11 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - 44.1 kHz für gute Auflösung
 - Mono-Kanal ausreichend
 - PCM_16BIT Encoding
+![bg left h:80%](https://imgur.com/1YmZPqD.png)
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
 ### Decibel Meter (Teil 2)
 **Visualisierung:**
 - Aktuellen dB-Wert groß anzeigen
@@ -111,8 +153,10 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Farbe: Alpha-Wert für Highlight
 - Text-Labels für dB-Bereiche
 - Statistik-Anzeige
+![bg left h:80%](https://imgur.com/vmNKBI1.png)
 
 ---
+
 
 ### Decibel Meter - Performance
 **Optimierungen:**
@@ -128,6 +172,21 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
+### Decibel Meter - Layout
+**Activity Decibel Layout:**
+- **Hero-Metrik:** Prominente 72sp Anzeige für dB-Werte
+- **Legend-Stack:** Vertikale Liste für Lautstärkebereiche
+- **Stats-Footer:** Kompakte Textanzeige für Zusatzdaten
+
+**Layout-Hierarchie:**
+- **ConstraintLayout** (Root)
+- **Main Display** (Top-Header-Anker)
+- **LinearLayout** (Vertikaler Container für dB-Ranges)
+![bg left h:60%](https://imgur.com/jXVJD6f.png)
+
+---
+<style scoped> li { font-size: 22px; } </style>
 ### Spirit Level (Wasserwaage)
 **Wasserwaage-Implementierung:**
 - SensorManager für Accelerometer
@@ -139,10 +198,11 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Kreis als Rahmen
 - Blase verschobener Kreis
 - Position abhängig vom Neigungswinkel
-- Grün wenn +/- 1°, sonst rot
+- Grün wenn +/- 1°, sonst blau
+![bg right h:80%](https://imgur.com/bgwG2Tk.png)
 
 ---
-
+<style scoped> li { font-size: 22px; } </style>
 ### Spirit Level - Sensor Fusion
 **Sensor-Architektur:**
 - `TYPE_ACCELEROMETER` verwenden
@@ -151,12 +211,30 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Filterung für Glättung
 
 **Precision:**
-- Winkel mit 1 Nachkommastelle
-- Status-Text ("Waagerecht" wenn platt)
+- Winkel mit ohne Nachkommastelle
+- Verzögern der Aktualisierung (Smoothing)
 - Dynamische Farbumschaltung
+![bg right h:40%](https://imgur.com/dTAy4Xi.png)
 
 ---
 
+<style scoped> li { font-size: 22px; } </style>
+### Spirit Level Integration
+**Merge-Prozess:**
+- Feature-Branch `spitit-level`
+- Konfliktlösung mit master
+- Settings-Integration
+- Grid-Columns Kombination
+
+**Ergebnis:**
+- Spirit Level in Tool-Grid
+- Icon: `ic_spirit_level`
+- String: "Wasserwaage" / "Spirit Level"
+ ![bg left h:60%](https://imgur.com/9StwOMR.png)
+
+---
+
+<style scoped> li { font-size: 22px; } </style>
 ### Internationalization (I18n)
 **Mehrsprachigkeits-System:**
 - Runtime Language Switching
@@ -169,6 +247,7 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Context-Wrapper
 - `Locale.forLanguageTag()`
 - `setLocale()` auf Configuration
+ ![bg left h:60%](https://imgur.com/52vm4Lw.png)
 
 ---
 
@@ -186,34 +265,7 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 
 ---
 
-### Spirit Level Integration
-**Merge-Prozess:**
-- Feature-Branch `spitit-level`
-- Konfliktlösung mit master
-- Settings-Integration
-- Grid-Columns Kombination
-
-**Ergebnis:**
-- Spirit Level in Tool-Grid
-- Icon: `ic_spirit_level`
-- String: "Wasserwaage" / "Spirit Level"
-
----
-
-### Counter UI Layout
-**Activity Counter Layout:**
-- Grid für +/- Buttons (50/50 Split)
-- Centered TextView für Counter (0)
-- Reset-Button über Mitte
-- Bottom-Alignment für Bedienelemente
-
-**Layout-Hierarchie:**
-- ConstraintLayout als Root
-- Guideline für vertikale Mitte
-- Responsive Breite via Constraints
-
----
-
+<style scoped> li { font-size: 22px; } </style>
 ### Icon-Integration
 **Icon-Struktur:**
 - Mipmap-Ordner für Tool-Icons
@@ -225,6 +277,7 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - `ic_counter`, `ic_light`, `ic_spirit_level`
 - `ic_decibel_meter`
 - `ic_siren` (für später)
+ ![bg left h:80%](https://imgur.com/qSZ0X8D.png)
 
 ---
 
