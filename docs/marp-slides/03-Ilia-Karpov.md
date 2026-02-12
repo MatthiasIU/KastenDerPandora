@@ -6,9 +6,7 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 ---
 
 # Werkzeugkasten (Kasten der Pandora)
-
 ## Projektstatus - Februar 2026
-
 1. Johannes Lehmann
 2. Matthias Reps
 3. **Ilia Karpov**
@@ -20,230 +18,127 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 - Uhr-System (Clock/Alarm/Stopwatch/Timer)
 - I18n System gemeinsam mit Matthias
 - Siren Tool Implementierung
-- UI-Standardisierung
-- Merge-Koordination
-
-**Ziel:**
-- Zeit-basierte Tools
-- Komplette Uhr-Funktionalität
-- Audio-Tools
+- UI-Standardisierung & Merge-Koordination
+**Ziel:** Zeit-basierte Tools, Audio-Tools, komplette Uhr-Funktionalität
 
 ---
 
-### Clock - Grundfunktionalität
+<!--header: Uhr-System-->
+
+#### Übersicht
+
+
+**Fragment-basierte Architektur mit Bottom Navigation:**
+
+<style scoped> table { font-size: 18px; } </style>
+
+| Fragment | Funktion |
+|----------|----------|
+| `ClockFragment` | Echtzeit-Uhr (HH:MM:SS), Handler-Updates |
+| `AlarmFragment` | `AlarmManager`, `RecyclerView`, `TimePicker` |
+| `StopwatchFragment` | Start/Stop/Reset, Millisekunden-Präzision |
+| `TimerFragment` | Countdown-Logik, Alarm beim Ablauf |
+
+**Navigation:**
+- `menu/bottom_nav_clock.xml`
+- `FragmentManager`
+- Vector Drawables
+
+---
+
+#### Technische Details
+
 **Echtzeit-Uhr:**
-- System.currentTimeMillis()
-- Formatierung: HH:MM:SS
-- Update jede Sekunde (Handler)
+- `System.currentTimeMillis()`
+- `Handler` für sekündliche Updates
 - Großes Display zentriert
 
-**Layout:**
-- Fragment-basierte Navigation
-- Bottom Navigation Bar
-- 4 Tabs: Clock, Alarm, Stopwatch, Timer
 
----
-
-### Alarm - Wecker
-**Alarm-Implementierung:**
-- AlarmManager Integration
-- PendingIntent für Alarm-Trigger
-- RecyclerView für Alarm-Liste
-- Floating Action Button (+)
-
-**Features:**
-- Zeit einstellen (TimePicker)
-- Datum anzeigen
+**Alarm:**
+- `PendingIntent` für Trigger
+- FAB zum Hinzufügen
 - Lösch-Button pro Alarm
-- "Keine Wecker eingestellt" Placeholder
 
----
-
-### Stopwatch - Stoppuhr
-**Stoppuhr-Funktionalität:**
-- Start/Stop/Reset Buttons
-- Millisekunden-Präzision
-- Format: MM:SS:ms
-- ElapsedTime Berechnung
-
-**Performance:**
-- Handler für regelmäßige Updates
-- Start-Zeit speichern
-- Stop-Zeit berechnen
-- Formatierung zu String
-
----
-
-### Timer - Countdown
-**Timer-Implementierung:**
-- Start-Zeit eingeben
-- Countdown-Logik
+**Stopwatch/Timer:**
+- `ElapsedTime` Berechnung
 - Zero-Reach Handler
-- Alarm beim Ablauf
-
-**UI-Elemente:**
-- Button zum Starten
-- Anzeige verbleibender Zeit
-- Reset-Funktionalität
-- Visual Feedback beim Ablauf
+- Visual Feedback
 
 ---
 
-### Clock Fragment-Architektur
-**Navigation-Implementierung:**
-- Bottom Navigation Bar
-- FragmentManager für Tab-Switching
-- Menu-XML für Navigation-Items
-- Icons für Tabs
+<!--header: ''-->
 
-**Fragmente:**
-- ClockFragment (Aktuelle Uhr)
-- AlarmFragment (Alarme verwalten)
-- StopwatchFragment (Stoppuhr)
-- TimerFragment (Countdown)
+### Sirene
+#### Konzept & Patterns
 
----
+**`AudioTrack` API (programmatische Sound-Generierung):**
 
-### Bottom Navigation Setup
-**Navigation-Konfiguration:**
-- `menu/bottom_nav_clock.xml`
-- 4 Items mit Icons
-- OnItemSelectedListener
-- Fragment Transaction
+| Pattern | Beschreibung |
+|---------|--------------|
+| Loud Tone | Kontinuierliche Sinuswelle, 500-2500 Hz |
+| SOS | Morse: · · · — — — · · · (200ms/400ms Timing) |
 
-**Icons:**
-- ic_clock, ic_alarm
-- ic_stopwatch, ic_timer
-- Vector Drawables für Skalierbarkeit
+**Vorteile:** Keine externen Ressourcen, Runtime-Anpassung, kleinere APK
 
 ---
 
-### Siren - Grundkonzept
-**Siren-Implementierung:**
-- AudioTrack API (nicht Sound-Dateien)
-- Programmatic Sound Generation
-- Zwei Patterns: Loud Tone, SOS
-- Start/Stop Toggle-Button
+<!--header: Sirene-->
 
-**Vorteile:**
-- Keine externen Ressourcen
-- Runtime-Anpassung möglich
-- Kleinere APK-Größe
+#### UI & Implementation
+**Interface:**
+- Toggle-Button (200x200dp kreisförmig)
+- `RadioGroup` für Pattern-Auswahl
+- `SeekBar`: Frequenz (500-2500 Hz), Lautstärke (0-100%)
 
----
-
-### Siren - Loud Tone
-**Lauter Ton Modus:**
-- Kontinuierliche Sinuswelle
-- Frequenz: 500-2500 Hz (einstellbar)
-- Volumen: 0-100% (einstellbar)
-- AudioAttributes.USAGE_ALARM
-
-**Implementation:**
+**Audio-Specs:**
+- 44.1 kHz, Mono, `PCM_16BIT`
 - Coroutine für Audio-Loop
-- Buffer-Generierung mit Sinus
-- Real-time Parameter-Updates
+- `stop()`/`release()` in `onPause()`/`onDestroy()`
 
 ---
 
-### Siren - SOS Pattern
-**Morse-Code Implementierung:**
-- SOS: · · · — — — · · ·
-- Timing: Short 200ms, Long 400ms
-- Gaps: 200ms (inter), 400ms (letter), 800ms (word)
-- Endlosschleife
-
-**Technical:**
-- Tone/Silence abwechselnd
-- Frequenz aus Slider übernommen
-- Coroutine suspend functions
-
----
-
-### Siren UI
-**Siren-Interface:**
-- Großer kreisförmiger Toggle-Button (200x200dp)
-- RadioGroup für Pattern-Auswahl
-- SeekBar für Frequenz (500-2500 Hz)
-- SeekBar für Lautstärke (0-100%)
-- Status-Indicator
-
-**Labels:**
-- Format-Strings (`%1$d Hz`, `%1$d%%`)
-- Dynamisch bei Slider-Bewegung
-
----
-
-### Siren - Audio Lifecycle
-**Audio-Management:**
-- AudioTrack.play() im Coroutine
-- stop/release in onPause()
-- stop/release in onDestroy()
-- Verhindert Audio nach Activity-Verlassen
-
-**Bug Fix:**
-- Initialisierung der Display-Werte
-- TextViews zeigten "%1$d Hz" statt "1000 Hz"
-- `initializeDisplayValues()` Methode
-
----
-
-### Siren - Technical Implementation
-**Audio-Spezifikationen:**
-- SampleRate: 44.1 kHz
-- Mono-Kanal
-- PCM_16BIT Encoding
-- Buffer: sampleRate/10 (100ms)
-
-**Pattern-Switch:**
-- Bei Pattern-Wechsel: Stop → Start neu
-- Verhindert Audio-Artefakte
-- Smooth Transition
-
----
+<!--header: i18n-->
 
 ### I18n - Runtime Switching
 **Language-Management:**
-- PandoraApplication Context-Wrapper
-- attachBaseContext() Override
-- SharedPreferences KEY_LANGUAGE
-- Locale.forLanguageTag()
+- `PandoraApplication` Context-Wrapper
+- `attachBaseContext()` Override
+- `SharedPreferences` `KEY_LANGUAGE`
+- `Locale.forLanguageTag()`
 
-**Supported:**
-- Deutsch (default)
-- English (Englisch)
-- Erweiterbar für mehr Sprachen
+**Supported:** Deutsch (default), English – erweiterbar
 
 ---
 
+<!--header: ''-->
+
 ### Projektstatus - Gesamtbild
 
-**Erledigte Tools (9/15):**
-✅ Lampe (Johannes/Matthias)
-✅ Zähler (Matthias)
-✅ Uhr (Johannes/Ilia) - mit 4 Fragments
-✅ Rechner (Placeholder)
-✅ Winkelmesser (Placeholder)
-✅ Wasserwaage (Matthias)
-✅ Dezibelmesser (Matthias)
-✅ Kompass (Placeholder)
-✅ Sirene (WSHAPER)
+<div class="columns">
+<div>
 
-**Noch zu tun (6/15):**
-⏳ Lineal (Placeholder)
-⏳ Lupe (Placeholder)
-⏳ Sprachaufnahme (Placeholder)
-⏳ Lumenmesser (Placeholder)
-⏳ Kamera (Placeholder)
-⏳ Audiospektrum (Implementiert aber reverted)
+**Erledigte Tools (9/15):**
+- ✅ Lampe, Zähler, Uhr (4 Fragments)
+- ✅ Rechner, Winkelmesser, Wasserwaage
+- ✅ Dezibelmesser, Kompass, Sirene
+
+**Noch offen (6/15):**
+- ⏳ Lineal, Lupe, Sprachaufnahme
+- ⏳ Lumenmesser, Kamera, Audiospektrum
+
+</div>
+<div>
 
 **Infrastruktur (100%):**
-✅ BaseToolActivity (Johannes)
-✅ Settings-System (Johannes)
-✅ I18n-System (Ilia/Matthias)
-✅ Grid-Layout (Johannes)
-✅ Darkmode (Johannes)
-✅ Header-Layout (Johannes)
+✅ `BaseToolActivity`
+✅ Settings-System
+✅ I18n-System
+✅ Grid-Layout
+✅ Darkmode
+✅ Header-Layout
+
+</div>
+</div>
 
 ---
 
@@ -254,7 +149,7 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 - Data Layer: Sensors/System Services
 
 **Aktuelle Struktur:**
-- Views in Activities (keine ViewModels)
+- Views in Activities (keine `ViewModels`)
 - Business Logic in Activities
 - Sensors direkt in Activities
 
@@ -262,103 +157,43 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 
 ### Herausforderungen & Lessons Learned
 
-**Challenges:**
-1. **Audio-Permission Handling** (Decibel, Siren)
-   - Runtime Permission Request nötig
-   - Denied-Fall abfangen
-
-2. **Fragment-Navigation** (Clock)
-   - Back Button Management
-   - State Preservation
-
-3. **Audio-Synthesis** (Siren)
-   - Coroutine vs Thread Entscheidung
-   - Buffer-Größen optimieren
-
-4. **I18n Runtime-Switching**
-   - Context recreation tricky
-   - Activity Restart nötig
+| Challenge | Lösung |
+|-----------|--------|
+| Audio-Permission Handling | Runtime Permission Request, Denied-Fall abfangen |
+| Fragment-Navigation | Back Button Management, State Preservation |
+| Audio-Synthesis | Coroutines, Buffer-Größen optimieren |
+| I18n Runtime-Switching | Context recreation, Activity Restart |
 
 ---
 
-### Code-Quality & Standards
+### Code-Quality & Performance
+**Standards:**
+- Material Design 3, Accessibility
+- Kotlin Style Guide, Consistent Naming
+- Feature-Branches, Code-Review via PRs
 
-**Angewandte Standards:**
-- Material Design 3 Richtlinien
-- Accessibility (Screen Reader, Fokus)
-- Kotlin Style Guide
-- Consistent Naming
-
-**Best Practices:**
-- Kommentare in Code
-- Klare Commit-Messages
-- Feature-Branches
-- Code-Review via PRs
-
----
-
-### Performance-Optimierungen
-
-**Maßnahmen:**
+**Optimierungen:**
 - Coroutines für Background-Arbeit
-- Handler für UI-Updates
+- `Handler` für UI-Updates
 - Efficient Buffer-Management
-- View Recycling (RecyclerView)
-
-**Messungen:**
-- Decibel: ~60 FPS
-- Clock: Smooth second updates
-- Siren: No lag in audio loop
+- ~60 FPS (Decibel), No lag (Siren)
 
 ---
 
-### Testing-Strategie
-
-**Geplante Tests:**
-- Unit Tests für Rechner
-- Unit Tests für Zähler-Logik
-- Instrumented Tests für UI
-- Sensor-Mock für Tests
-
-**Challenges:**
-- Sensor-Tests schwierig ohne Device
-- Audio-Tests require Hardware
-- Fragment-Test komplex
-
----
-
-### Build-Konfiguration
-
+### Build & Deployment
 **Gradle-Setup:**
-- Kotlin 2.0
-- Android Gradle Plugin 8.9
-- Dependencies via Version Catalog
-- Multi-variant Builds (debug/release)
-
-**Build-Stats:**
-- APK Größe: ~15 MB (debug)
-- Build Zeit: ~30 Sekunden
-- Dependencies: 4 (AndroidX Core, AppCompat, Material, ConstraintLayout)
-
----
-
-### Deployment & Release
+- Kotlin 2.0, AGP 8.9
+- APK: ~15 MB, Build: ~30s
+- 4 Dependencies (AndroidX, Material)
 
 **Release-Vorbereitung:**
-- ProGuard Konfiguration
-- Signierung der APK
-- Versioning (v1.0)
-- Release Notes erstellen
-
-**Distribution:**
+- ProGuard, APK-Signierung
 - GitHub Releases
-- APK Upload
 - Play Store Vorbereitung
 
 ---
 
 ### Abgleich mit Vorlesungsanforderungen
-
 | Anforderung | Status |
 |-------------|---------|
 | Planung | ✅ README.md, Projektplan |
@@ -371,123 +206,58 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 ---
 
 ### KI-Einsatz
-
-**KI verwendet für:**
+**Verwendet für:**
 - Code-Verbesserungen und Hilfestellungen
 - Code-Kommentare generieren
-- README Dokumentation
-- Use-Case Dokumentation
+- README & Use-Case Dokumentation
 - Bug-Fix-Suche (z.B. Coroutines)
 
-**Wertbeitrag:**
-- Beschleunigte Entwicklung
-- Bessere Code-Qualität
-- Dokumentations-Unterstützung
+**Wertbeitrag:** Beschleunigte Entwicklung, bessere Code-Qualität
 
 ---
 
-### Nächste Schritte - Priorität 1
+### Nächste Schritte
 
-**Hochprioritäre Tasks:**
-1. ✅ Siren Tool (abgeschlossen)
-2. ⏳ Audiospektrum (implementiert, aber reverted)
-3. ⏳ Sprachaufnahme implementieren
-4. ⏳ Lumenmesser implementieren
-5. ⏳ Kamera implementieren
+| Priorität | Tasks |
+|-----------|-------|
+| **Hoch** | Audiospektrum, Sprachaufnahme, Lumenmesser, Kamera |
+| **Mittel** | Unit Tests, `ViewModel`-Refactoring, Dependency Injection |
+| **Niedrig** | Widget Support, Custom Themes, Animationen |
 
-**Zeitschätzung:**
-- Je 2-3 Tage pro Tool
-- Gesamt: 6-8 Wochen für alle 6 verbleibenden Tools
-
----
-
-### Nächste Schritte - Priorität 2
-
-**Mittelprioritäre Tasks:**
-1. Unit Tests schreiben (Rechner, Zähler)
-2. Instrumented Tests für UI
-3. ViewModel-Refactoring
-4. Dependency Injection einführen
-5. Offline-Modus implementieren
-
-**Architektur:**
-- ViewModel für State-Management
-- LiveData für Observables
-- Repository Pattern für Data Layer
-
----
-
-### Nächste Schritte - Priorität 3
-
-**Niedrigprioritäre Tasks:**
-1. Widget Support (Homescreen)
-2. Widgets pro Tool
-3. Custom Themes erstellen
-4. Animationen hinzufügen
-5. Sound-Effekte für Feedback
-6. Haptic Feedback
-
-**Polish:**
-- Transitions verbessern
-- Loading States
-- Error Handling
+**Zeitschätzung:** 2-3 Tage pro Tool → 6-8 Wochen für alle
 
 ---
 
 ### Risiken & Mitigation
-
-**Identifizierte Risiken:**
-1. **Kompatibilität** (verschiedene Android-Versionen)
-   - Lösung: MinSdk 31, Test auf Geräten
-
-2. **Performance** auf Low-End Devices
-   - Lösung: Profiling, Optimierung
-
-3. **Audio-Permissions** (User-Denial)
-   - Lösung: Fallback UI, Erklärung
-
-4. **Battery Drain** (Sensoren im Hintergrund)
-   - Lösung: Stop-Sensors in onPause
+| Risiko | Mitigation |
+|--------|------------|
+| Android-Kompatibilität | `minSdk 31`, Test auf Geräten |
+| Performance (Low-End) | Profiling, Optimierung |
+| Audio-Permission Denial | Fallback UI, Erklärung |
+| Battery Drain | Stop-Sensors in `onPause()` |
 
 ---
 
-### Abschlusspräsentation - Summary
-
+### Summary
 **Projektstatus:**
-- Solide Grundlage gelegt
-- 9 von 15 Tools implementiert
-- Infrastruktur vollständig
-- I18n implementiert
-- ⏳ 6 Tools noch offen
-- ⏳ Testing-Phase beginnt
+- 9/15 Tools implementiert, Infrastruktur 100%
+- I18n implementiert, 6 Tools noch offen
 
 **Team-Leistung:**
 - Johannes: Infrastruktur & Settings
-- Matthias: Concrete Tools (Counter, Light, Decibel, Spirit)
+- Matthias: Counter, Light, Decibel, Spirit Level
 - Ilia: Clock-System & Audio-Tools
 
-**Nächste Meilensteine:**
-1. Fehlende Tools implementieren
-2. Tests schreiben
-3. Release v1.0 vorbereiten
-4. Dokumentation finalisieren
+**Nächste Meilensteine:** Fehlende Tools → Tests → Release v1.0
 
 ---
 
+# Vielen Dank für Eure Aufmerksamkeit!
+
 ### Q&A
-
 **Fragen?**
-
-- Zu welchem Tool gibt es Fragen?
-- Wie geht es mit Audiospektrum weiter?
-- Soll Priority auf Testing gelegt werden?
-- Timeline für Release v1.0?
 
 **Kontakt:**
 - Johannes Lehmann: johanneslehmann19@gmail.com
 - Matthias Reps: matthias.reps@iu-study.org
-- Ilia Karpov: 42714629+WSHAPER@users.noreply.github.com
-
----
-
-# Vielen Dank für Ihre Aufmerksamkeit!
+- Ilia Karpov: ilia.karpov.96@gmail.com
