@@ -119,29 +119,22 @@ abstract class BaseToolActivity : AppCompatActivity() {
 
 ### Settings-Infrastruktur
 
-<div class="columns">
-<div>
-
 **Einstellungsseite implementiert:**
 - SettingsActivity erstellt
 - Shared UI-Komponenten
 - SharedPreferences Integration
 - Rückkehr zu MainActivity
 
-</div>
-<div>
-
 **Architektur:**
 - Separation of Concerns
 - Settings in eigenem Activity
 - Persistenz via SharedPreferences
 
-</div>
-</div>
+![bg left h:100%](https://i.imgur.com/di5H7yH.png)
 
 ---
 
-### Darkmode-Implementierung
+### Darkmode<br>Implementierung
 **Dark Mode Feature:**
 - Umschaltbare Themes
 - `values-night` Resource Ordner
@@ -153,7 +146,8 @@ abstract class BaseToolActivity : AppCompatActivity() {
 - Text-Kontraste sicherstellen
 - Icon-Sichtbarkeit prüfen
 
-![bg left]
+![bg left h:100%](https://i.imgur.com/7CzxIxy.png)
+![bg left h:100%](https://i.imgur.com/kjOAf49.png)
 
 ---
 
