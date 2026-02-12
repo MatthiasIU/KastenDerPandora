@@ -13,8 +13,15 @@ footer: Werkzeugkasten | Johannes Lehmann | 16.02.2026
 2. Matthias Reps
 3. Ilia Karpov
 
+<!--
+Willkommen zur Projektpräsentation. Ich bin Johannes und stelle zuerst die Infrastruktur und Basis-Architektur vor.
+-->
+
 ---
 ### Projektübersicht
+<!--
+Kurze Einführung ins Projekt: Android-App mit mehreren Alltagstools. Fokus auf Modularität und Erweiterbarkeit.
+-->
 **Projekt:** Kasten der Pandora
 - Digitaler Werkzeugkasten als Android-App
 - Mehrere Alltagswerkzeuge in zentraler App
@@ -32,6 +39,9 @@ footer: Werkzeugkasten | Johannes Lehmann | 16.02.2026
 <div>
 
 ### Projektinitialisierung
+<!--
+Zwei Säulen meiner Arbeit: Links die Initialisierung, rechts die Infrastruktur. Beides war Grundlage für die Teamarbeit.
+-->
 **Erste Schritte:**
 - Repository-Initialisierung
 - README.md Dokumentation
@@ -64,6 +74,9 @@ footer: Werkzeugkasten | Johannes Lehmann | 16.02.2026
 
 ---
 #### `BaseToolActivity`
+<!--
+Herzstück der Architektur: Abstrakte Basisklasse verhindert Code-Duplizierung und sorgt für einheitliches Verhalten.
+-->
 
 Abstrakte Basisklasse für Tool-Screens mit einheitlichem Setup
 
@@ -80,6 +93,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 **Lebenszyklus:** `onCreate` → Edge-to-Edge → Insets → Header → Zurück-Btn → Wischen → Inhalt
 
 ---
+<!--
+Die wichtigsten überschreibbaren Methoden. setupToolContent für UI-Init ist am häufigsten genutzt.
+-->
 
 **Wichtige Methoden:**
 
@@ -92,6 +108,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Placeholder-System
+<!--
+Placeholder ermöglichten frühes Testen der Navigation ohne vollständige Tool-Implementierung.
+-->
 
 <div class="columns">
 <div>
@@ -118,6 +137,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Settings-Infrastruktur
+<!--
+Zentrale Einstellungsseite mit SharedPreferences für Persistenz. Screenshot zeigt das finale Design.
+-->
 
 **Einstellungsseite implementiert:**
 - SettingsActivity erstellt
@@ -135,6 +157,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Darkmode<br>Implementierung
+<!--
+Zwei Screenshots zeigen Light und Dark Mode. Besondere Herausforderung: Kontraste und Icon-Sichtbarkeit.
+-->
 **Dark Mode Feature:**
 - Umschaltbare Themes
 - `values-night` Resource Ordner
@@ -152,6 +177,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Grid-Columns Einstellung
+<!--
+Nutzer kann 2-5 Spalten wählen. Icons werden automatisch skaliert. Live-Vorschau während der Auswahl.
+-->
 **Anpassbare Raster-Spalten:**
 - 2-5 Spalten wählbar
 - Dynamische Icon-Größenberechnung
@@ -166,6 +194,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Merge-Management
+<!--
+Koordination der Feature-Branches war wichtig für reibungslose Zusammenarbeit. PR-Workflow über GitHub.
+-->
 **Zusammenführung von Branches:**
 - Feature-Branches: `settings_view`, `clock`, etc.
 - Systematisches Merge-Management
@@ -181,6 +212,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Button-Positioning & UX
+<!--
+Material Design Richtlinien eingehalten. Touch-Targets mindestens 48dp. Screen Reader Unterstützung implementiert.
+-->
 **Konsistente UI-Elemente:**
 - Button-Standardisierung
 - Accessibility-Verbesserungen
@@ -196,6 +230,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Header-Layout
+<!--
+Wiederverwendbares Header-Layout via include-Tag. Reduziert Duplizierung und erleichtert Änderungen.
+-->
 **Gemeinsamer Header:**
 - Titel-Text dynamisch pro Tool
 - App-Icon rechts
@@ -210,6 +247,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Placeholders für Tools
+<!--
+Demo-Activities ermöglichten Testen der App-Struktur bevor echte Tools implementiert waren.
+-->
 **Demo-Aktivitäten:**
 - Zeigten App-Struktur
 - Ermöglichten Testen des Grids
@@ -223,6 +263,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Dokumentationsstruktur
+<!--
+README enthält alles Wichtige für neue Entwickler. KI-Einsatz transparent dokumentiert.
+-->
 **README.md Content:**
 - Projektbeschreibung
 - Funktionsumfang
@@ -239,6 +282,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Git-Workflow
+<!--
+Feature-Branches und PR-Workflow. Commit-Messages beschreiben das Warum, nicht das Was.
+-->
 **Branching-Strategie:**
 - Feature-Branches pro Tool
 - Pull-Request Workflow
@@ -253,6 +299,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Design-System
+<!--
+Material Design 3 als Grundlage. Konsistente Farben, Typographie und Abstände für professionelles Erscheinungsbild.
+-->
 **Visuelle Konsistenz:**
 - Material Design 3
 - Farbschema definiert
@@ -267,6 +316,9 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ### Status & Rückblick
+<!--
+Zusammenfassung meiner Beiträge. Wichtigste Erkenntnis: Gute Architektur von Anfang an spart später Zeit.
+-->
 **Johannes' Beiträge Zusammenfassung:**
 - Projekt-Initialisierung
 - Infrastruktur (BaseToolActivity, Grid)
@@ -282,3 +334,6 @@ abstract class BaseToolActivity : AppCompatActivity() {
 ---
 
 ## Übergabe an Matthias Reps
+<!--
+Matthias übernimmt und zeigt seine Tool-Implementierungen: Counter, Light, I18n, Decibel Meter und Spirit Level.
+-->
