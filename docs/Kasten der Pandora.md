@@ -5,7 +5,8 @@ paginate: true
 footer:
 ---
 
-# Kasten der Pandora - Project Status Presentation
+# Werkzeugkasten (Kasten der Pandora)
+
 ## Projektstatus - Februar 2026
 
 ---
@@ -15,7 +16,7 @@ footer:
 
 ---
 
-### Folie 1: Projektübersicht
+### Projektübersicht
 **Projekt:** Kasten der Pandora
 - Digitaler Werkzeugkasten als Android-App
 - Mehrere Alltagswerkzeuge in zentraler App
@@ -29,7 +30,7 @@ footer:
 
 ---
 
-### Folie 2: Projektinitiale
+### Projektinitiale
 **Erste Schritte (Johannes Lehmann):**
 - Repository-Initialisierung
 - README.md Dokumentation
@@ -44,7 +45,7 @@ footer:
 
 ---
 
-### Folie 3: Infrastruktur - BaseToolActivity
+### Infrastruktur - BaseToolActivity
 **Einführung der Basisklasse:**
 - Gemeinsame Header für alle Tools
 - Konsistente Navigation
@@ -58,7 +59,7 @@ footer:
 
 ---
 
-### Folie 4: Placeholder-System
+### Placeholder-System
 **Initiales Tool-Konzept:**
 - Placeholder-Activities für alle geplanten Tools
 - Grid-basierte Startseite
@@ -74,7 +75,7 @@ footer:
 
 ---
 
-### Folie 5: Settings-Infrastruktur
+### Settings-Infrastruktur
 **Einstellungsseite implementiert:**
 - SettingsActivity erstellt
 - Shared UI-Komponenten
@@ -88,7 +89,7 @@ footer:
 
 ---
 
-### Folie 6: Darkmode-Implementierung
+### Darkmode-Implementierung
 **Dark Mode Feature:**
 - Umschaltbare Themes
 - `values-night` Resource Ordner
@@ -102,7 +103,7 @@ footer:
 
 ---
 
-### Folie 7: Grid-Columns Einstellung
+### Grid-Columns Einstellung
 **Anpassbare Raster-Spalten:**
 - 2-5 Spalten wählbar
 - Dynamische Icon-Größenberechnung
@@ -116,7 +117,7 @@ footer:
 
 ---
 
-### Folie 8: Merge-Management
+### Merge-Management
 **Zusammenführung von Branches:**
 - Feature-Branches: `settings_view`, `clock`, etc.
 - Systematisches Merge-Management
@@ -131,7 +132,7 @@ footer:
 
 ---
 
-### Folie 9: Button-Positioning & UX
+### Button-Positioning & UX
 **Konsistente UI-Elemente:**
 - Button-Standardisierung
 - Accessibility-Verbesserungen
@@ -146,7 +147,7 @@ footer:
 
 ---
 
-### Folie 10: Header-Layout
+### Header-Layout
 **Gemeinsamer Header:**
 - Titel-Text dynamisch pro Tool
 - App-Icon rechts
@@ -160,7 +161,7 @@ footer:
 
 ---
 
-### Folie 11: Placeholders für Tools
+### Placeholders für Tools
 **Demo-Aktivitäten:**
 - Zeigten App-Struktur
 - Ermöglichten Testen des Grids
@@ -173,7 +174,7 @@ footer:
 
 ---
 
-### Folie 12: Dokumentationsstruktur
+### Dokumentationsstruktur
 **README.md Content:**
 - Projektbeschreibung
 - Funktionsumfang
@@ -189,7 +190,7 @@ footer:
 
 ---
 
-### Folie 13: Git-Workflow
+### Git-Workflow
 **Branching-Strategie:**
 - Feature-Branches pro Tool
 - Pull-Request Workflow
@@ -203,7 +204,7 @@ footer:
 
 ---
 
-### Folie 14: Design-System
+### Design-System
 **Visuelle Konsistenz:**
 - Material Design 3
 - Farbschema definiert
@@ -217,7 +218,7 @@ footer:
 
 ---
 
-### Folie 15: Status & Rückblick
+### Status & Rückblick
 **Johannes' Beiträge Zusammenfassung:**
 - ✅ Projekt-Initialisierung
 - ✅ Infrastruktur (BaseToolActivity, Grid)
@@ -237,7 +238,7 @@ footer:
 
 ---
 
-### Folie 16: Matthias' Fokusbereiche
+### Matthias' Fokusbereiche
 **Hauptbeiträge:**
 - Counter Tool Implementierung
 - Light Tool (Taschenlampe)
@@ -252,7 +253,7 @@ footer:
 
 ---
 
-### Folie 17: Counter Tool
+### Counter Tool
 **Zähler-Implementierung:**
 - Inkrement/Dekrement Buttons
 - Großes Zahlen-Display (120sp)
@@ -267,7 +268,7 @@ footer:
 
 ---
 
-### Folie 18: Counter - Technical Details
+### Counter - Technical Details
 **Technische Aspekte:**
 - State Management in Activity
 - OnClickListener Setup
@@ -281,7 +282,7 @@ footer:
 
 ---
 
-### Folie 19: Light Tool (Taschenlampe)
+### Light Tool (Taschenlampe)
 **Flashlight-Implementierung:**
 - CameraManager API
 - setTorchMode() Methode
@@ -295,7 +296,7 @@ footer:
 
 ---
 
-### Folie 20: Light - Camera Handling
+### Light - Camera Handling
 **Kamera-Integration:**
 - CAMERA_SERVICE Zugriff
 - CameraIdList Iteration
@@ -308,7 +309,7 @@ footer:
 
 ---
 
-### Folie 21: Decibel Meter (Teil 1)
+### Decibel Meter (Teil 1)
 **Dezibelmesser-Konzept:**
 - AudioRecord für Mikrofon-Aufnahme
 - RMS (Root Mean Square) Berechnung
@@ -322,7 +323,7 @@ footer:
 
 ---
 
-### Folie 22: Decibel Meter (Teil 2)
+### Decibel Meter (Teil 2)
 **Visualisierung:**
 - Aktuellen dB-Wert groß anzeigen
 - 5 dB-Bereiche highlighten (0-45, 45-60, 60-80, 80-115, 115+)
@@ -336,7 +337,7 @@ footer:
 
 ---
 
-### Folie 23: Decibel Meter - Performance
+### Decibel Meter - Performance
 **Optimierungen:**
 - Background Thread für Aufnahme
 - Handler für UI-Updates (Main Thread)
@@ -350,7 +351,7 @@ footer:
 
 ---
 
-### Folie 24: Spirit Level (Wasserwaage)
+### Spirit Level (Wasserwaage)
 **Wasserwaage-Implementierung:**
 - SensorManager für Accelerometer
 - X- und Y-Achse für Neigung
@@ -365,7 +366,7 @@ footer:
 
 ---
 
-### Folie 25: Spirit Level - Sensor Fusion
+### Spirit Level - Sensor Fusion
 **Sensor-Architektur:**
 - TYPE_ACCELEROMETER verwenden
 - SensorEventListener Implementierung
@@ -379,7 +380,7 @@ footer:
 
 ---
 
-### Folie 26: Internationalization (I18n)
+### Internationalization (I18n)
 **Mehrsprachigkeits-System:**
 - Runtime Language Switching
 - `values` und `values-en` Ordner
@@ -394,7 +395,7 @@ footer:
 
 ---
 
-### Folie 27: I18n - String Resources
+### I18n - String Resources
 **String-Management:**
 - Alle Strings externalisiert
 - Format-Strings (%1$d, %1$s)
@@ -408,7 +409,7 @@ footer:
 
 ---
 
-### Folie 28: Spirit Level Integration
+### Spirit Level Integration
 **Merge-Prozess:**
 - Feature-Branch `spitit-level`
 - Konfliktlösung mit master
@@ -422,7 +423,7 @@ footer:
 
 ---
 
-### Folie 29: Counter UI Layout
+### Counter UI Layout
 **Activity Counter Layout:**
 - Grid für +/- Buttons (50/50 Split)
 - Centered TextView für Counter (0)
@@ -436,7 +437,7 @@ footer:
 
 ---
 
-### Folie 30: Icon-Integration
+### Icon-Integration
 **Icon-Struktur:**
 - Mipmap-Ordner für Tool-Icons
 - HDPI Icons (64x64 typisch)
@@ -455,7 +456,7 @@ footer:
 
 ---
 
-### Folie 31: Ilia's Fokusbereiche
+### Ilia's Fokusbereiche
 **Hauptbeiträge:**
 - Uhr-System (Clock/Alarm/Stopwatch/Timer)
 - I18n System gemeinsam mit Matthias
@@ -470,7 +471,7 @@ footer:
 
 ---
 
-### Folie 32: Clock - Grundfunktionalität
+### Clock - Grundfunktionalität
 **Echtzeit-Uhr:**
 - System.currentTimeMillis()
 - Formatierung: HH:MM:SS
@@ -484,7 +485,7 @@ footer:
 
 ---
 
-### Folie 33: Alarm - Wecker
+### Alarm - Wecker
 **Alarm-Implementierung:**
 - AlarmManager Integration
 - PendingIntent für Alarm-Trigger
@@ -499,7 +500,7 @@ footer:
 
 ---
 
-### Folie 34: Stopwatch - Stoppuhr
+### Stopwatch - Stoppuhr
 **Stoppuhr-Funktionalität:**
 - Start/Stop/Reset Buttons
 - Millisekunden-Präzision
@@ -514,7 +515,7 @@ footer:
 
 ---
 
-### Folie 35: Timer - Countdown
+### Timer - Countdown
 **Timer-Implementierung:**
 - Start-Zeit eingeben
 - Countdown-Logik
@@ -529,7 +530,7 @@ footer:
 
 ---
 
-### Folie 36: Clock Fragment-Architektur
+### Clock Fragment-Architektur
 **Navigation-Implementierung:**
 - Bottom Navigation Bar
 - FragmentManager für Tab-Switching
@@ -544,7 +545,7 @@ footer:
 
 ---
 
-### Folie 37: Bottom Navigation Setup
+### Bottom Navigation Setup
 **Navigation-Konfiguration:**
 - `menu/bottom_nav_clock.xml`
 - 4 Items mit Icons
@@ -558,7 +559,7 @@ footer:
 
 ---
 
-### Folie 38: Siren - Grundkonzept
+### Siren - Grundkonzept
 **Siren-Implementierung:**
 - AudioTrack API (nicht Sound-Dateien)
 - Programmatic Sound Generation
@@ -572,7 +573,7 @@ footer:
 
 ---
 
-### Folie 39: Siren - Loud Tone
+### Siren - Loud Tone
 **Lauter Ton Modus:**
 - Kontinuierliche Sinuswelle
 - Frequenz: 500-2500 Hz (einstellbar)
@@ -586,7 +587,7 @@ footer:
 
 ---
 
-### Folie 40: Siren - SOS Pattern
+### Siren - SOS Pattern
 **Morse-Code Implementierung:**
 - SOS: · · · — — — · · ·
 - Timing: Short 200ms, Long 400ms
@@ -600,7 +601,7 @@ footer:
 
 ---
 
-### Folie 41: Siren UI
+### Siren UI
 **Siren-Interface:**
 - Großer kreisförmiger Toggle-Button (200x200dp)
 - RadioGroup für Pattern-Auswahl
@@ -609,12 +610,12 @@ footer:
 - Status-Indicator
 
 **Labels:**
-- Format-Strings (%1$d Hz, %1$d%%)
+- Format-Strings (`%1$d Hz`, `%1$d%%`)
 - Dynamisch bei Slider-Bewegung
 
 ---
 
-### Folie 42: Siren - Audio Lifecycle
+### Siren - Audio Lifecycle
 **Audio-Management:**
 - AudioTrack.play() im Coroutine
 - stop/release in onPause()
@@ -628,7 +629,7 @@ footer:
 
 ---
 
-### Folie 43: Siren - Technical Implementation
+### Siren - Technical Implementation
 **Audio-Spezifikationen:**
 - SampleRate: 44.1 kHz
 - Mono-Kanal
@@ -642,7 +643,7 @@ footer:
 
 ---
 
-### Folie 44: I18n - Runtime Switching
+### I18n - Runtime Switching
 **Language-Management:**
 - PandoraApplication Context-Wrapper
 - attachBaseContext() Override
@@ -656,7 +657,7 @@ footer:
 
 ---
 
-### Folie 45: Projektstatus - Gesamtbild
+### Projektstatus - Gesamtbild
 
 **Erledigte Tools (9/15):**
 ✅ Lampe (Johannes/Matthias)
@@ -687,7 +688,7 @@ footer:
 
 ---
 
-### Folie 46: Architektur-Überblick
+### Architektur-Überblick
 **MVVM-Architektur (angestrebt):**
 - Presentation Layer: Activities/Fragments
 - Domain Layer: Tool-Logic
@@ -700,7 +701,7 @@ footer:
 
 ---
 
-### Folie 47: Herausforderungen & Lessons Learned
+### Herausforderungen & Lessons Learned
 
 **Challenges:**
 1. **Audio-Permission Handling** (Decibel, Siren)
@@ -721,7 +722,7 @@ footer:
 
 ---
 
-### Folie 48: Code-Quality & Standards
+### Code-Quality & Standards
 
 **Angewandte Standards:**
 - Material Design 3 Richtlinien
@@ -737,7 +738,7 @@ footer:
 
 ---
 
-### Folie 49: Performance-Optimierungen
+### Performance-Optimierungen
 
 **Maßnahmen:**
 - Coroutines für Background-Arbeit
@@ -752,7 +753,7 @@ footer:
 
 ---
 
-### Folie 50: Testing-Strategie
+### Testing-Strategie
 
 **Geplante Tests:**
 - Unit Tests für Rechner
@@ -767,7 +768,7 @@ footer:
 
 ---
 
-### Folie 51: Build-Konfiguration
+### Build-Konfiguration
 
 **Gradle-Setup:**
 - Kotlin 2.0
@@ -782,7 +783,7 @@ footer:
 
 ---
 
-### Folie 52: Deployment & Release
+### Deployment & Release
 
 **Release-Vorbereitung:**
 - ProGuard Konfiguration
@@ -797,7 +798,7 @@ footer:
 
 ---
 
-### Folie 53: Abgleich mit Vorlesungsanforderungen
+### Abgleich mit Vorlesungsanforderungen
 
 | Anforderung | Status |
 |-------------|---------|
@@ -810,7 +811,7 @@ footer:
 
 ---
 
-### Folie 54: KI-Einsatz
+### KI-Einsatz
 
 **KI verwendet für:**
 - Code-Verbesserungen und Hilfestellungen
@@ -826,7 +827,7 @@ footer:
 
 ---
 
-### Folie 55: Nächste Schritte - Priorität 1
+### Nächste Schritte - Priorität 1
 
 **Hochprioritäre Tasks:**
 1. ✅ Siren Tool (abgeschlossen)
@@ -841,7 +842,7 @@ footer:
 
 ---
 
-### Folie 56: Nächste Schritte - Priorität 2
+### Nächste Schritte - Priorität 2
 
 **Mittelprioritäre Tasks:**
 1. Unit Tests schreiben (Rechner, Zähler)
@@ -857,7 +858,7 @@ footer:
 
 ---
 
-### Folie 57: Nächste Schritte - Priorität 3
+### Nächste Schritte - Priorität 3
 
 **Niedrigprioritäre Tasks:**
 1. Widget Support (Homescreen)
@@ -874,7 +875,7 @@ footer:
 
 ---
 
-### Folie 58: Risiken & Mitigation
+### Risiken & Mitigation
 
 **Identifizierte Risiken:**
 1. **Kompatibilität** (verschiedene Android-Versionen)
@@ -891,7 +892,7 @@ footer:
 
 ---
 
-### Folie 59: Abschlusspräsentation - Summary
+### Abschlusspräsentation - Summary
 
 **Projektstatus:**
 - ✅ Solide Grundlage gelegt
@@ -914,7 +915,7 @@ footer:
 
 ---
 
-### Folie 60: Q&A
+### Q&A
 
 **Fragen?**
 
