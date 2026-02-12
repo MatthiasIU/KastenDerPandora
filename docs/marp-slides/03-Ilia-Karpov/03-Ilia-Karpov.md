@@ -15,10 +15,12 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 
 ### Ilia's Fokusbereiche
 **Hauptbeiträge:**
-- Uhr-System (Clock/Alarm/Stopwatch/Timer)
+- Uhr-System
+	- Clock/Alarm/Stopwatch/Timer
 - I18n System gemeinsam mit Matthias
 - Siren Tool Implementierung
 - UI-Standardisierung & Merge-Koordination
+
 **Ziel:** Zeit-basierte Tools, Audio-Tools, komplette Uhr-Funktionalität
 
 ---
@@ -30,7 +32,10 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 
 **Fragment-basierte Architektur mit Bottom Navigation:**
 
-<style scoped> table { font-size: 18px; } </style>
+![bg left h:100%](https://i.imgur.com/tlRBPso.jpeg)
+![bg left h:100%](https://i.imgur.com/iyshgSK.png)
+
+<style scoped> table { font-size: 17px; } </style>
 
 | Fragment | Funktion |
 |----------|----------|
@@ -54,6 +59,13 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 - Großes Display zentriert
 
 
+![bg left h:100%](https://i.imgur.com/tlRBPso.jpeg)
+![bg left h:100%](https://i.imgur.com/iyshgSK.png)
+
+---
+
+<!--theme:modern-->
+
 **Alarm:**
 - `PendingIntent` für Trigger
 - FAB zum Hinzufügen
@@ -64,6 +76,10 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 - Zero-Reach Handler
 - Visual Feedback
 
+![bg left h:100%](https://i.imgur.com/n5gprZN.png)
+
+![bg left h:100%](https://i.imgur.com/71bV2KN.png)
+
 ---
 
 <!--header: ''-->
@@ -71,7 +87,9 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 ### Sirene
 #### Konzept & Patterns
 
-**`AudioTrack` API (programmatische Sound-Generierung):**
+**`AudioTrack` API**
+
+<style scoped> table { font-size: 18px; margin: 0 auto; } </style>
 
 | Pattern | Beschreibung |
 |---------|--------------|
@@ -80,9 +98,14 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 
 **Vorteile:** Keine externen Ressourcen, Runtime-Anpassung, kleinere APK
 
+
+![bg left h:100%](https://i.imgur.com/FdeYXW6.png)
+
 ---
 
 <!--header: Sirene-->
+
+<style scoped> p, li { font-size: 19px; } </style>
 
 #### UI & Implementation
 **Interface:**
@@ -94,6 +117,8 @@ footer: Werkzeugkasten | Ilia Karpov | 16.02.2026
 - 44.1 kHz, Mono, `PCM_16BIT`
 - Coroutine für Audio-Loop
 - `stop()`/`release()` in `onPause()`/`onDestroy()`
+
+![bg left h:100%](https://i.imgur.com/FdeYXW6.png)
 
 ---
 
