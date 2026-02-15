@@ -266,6 +266,10 @@ Demo-Activities ermöglichten Testen der App-Struktur bevor echte Tools implemen
 <!--
 README enthält alles Wichtige für neue Entwickler. KI-Einsatz transparent dokumentiert.
 -->
+
+<div class="columns">
+<div>
+
 **README.md Content:**
 - Projektbeschreibung
 - Funktionsumfang
@@ -274,10 +278,16 @@ README enthält alles Wichtige für neue Entwickler. KI-Einsatz transparent doku
 - Systemarchitektur
 - Use-Cases
 
+</div>
+<div>
+
 **Kosten-Nutzen-Analyse:**
 - KI-Einsatz dokumentiert
 - Code-Kommentare
 - Test-Dokumentation
+
+</div>
+</div>
 
 ---
 
