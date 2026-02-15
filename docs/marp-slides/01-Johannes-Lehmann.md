@@ -316,6 +316,10 @@ Durch Demo-Activities wurde uns das Testen der App-Struktur bevor echte Tools im
 <!--
 Unsere Dokumentationsstruktur haben wir in unserem README festgehalten und dies enthält alles Wichtige für neue Entwickler. Darin haben wir zum Beispiel die Projektbeschreibung und Projektplanung notiert, sowie KI-Einsatz transparent dokumentiert.
 -->
+
+<div class="columns">
+<div>
+
 **README.md Content:**
 - Projektbeschreibung
 - Funktionsumfang
@@ -324,10 +328,16 @@ Unsere Dokumentationsstruktur haben wir in unserem README festgehalten und dies 
 - Systemarchitektur
 - Use-Cases
 
+</div>
+<div>
+
 **Kosten-Nutzen-Analyse:**
 - KI-Einsatz dokumentiert
 - Code-Kommentare
 - Test-Dokumentation
+
+</div>
+</div>
 
 ---
 

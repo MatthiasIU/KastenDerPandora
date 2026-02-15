@@ -24,7 +24,7 @@ footer: Werkzeugkasten | Matthias Reps | 16.02.2026
 - Light Tool (Taschenlampe)
 - Decibel Meter (Dezibelmesser)
 - Spirit Level (Wasserwaage)
-- Internationalization (I18n) System
+- Internationalization (I18n) System zusammen mit Ilia
 
 **Ziel:**
 - Konkrete Funktionalität implementieren
