@@ -14,13 +14,21 @@ footer: Werkzeugkasten | Johannes Lehmann | 16.02.2026
 3. Ilia Karpov
 
 <!--
-Willkommen zur Projektpräsentation. Ich bin Johannes und stelle zuerst die Infrastruktur und Basis-Architektur vor.
+Willkommen zu unserer Projektpräsentation. Ich bin Johannes und stelle zuerst die Infrastruktur und Basis-Architektur vor.
 -->
 
 ---
 ### Projektübersicht
 <!--
-Kurze Einführung ins Projekt: Android-App mit mehreren Alltagstools. Fokus auf Modularität und Erweiterbarkeit.
+Erstmal eine kurze Einführung ins Projekt.
+
+Das Projekt haben wir "Kasten der Pandora" getauft und ist im Prinzip ein digitaler Werkzeugkasten. Die Idee ist, mehrere Alltagswerkzeuge in einer zentralen App zu bündeln, statt für jede Kleinigkeit eine eigene App zu haben.
+
+Als Oberfläche haben wir eine Rasteransicht, ähnlich wie ein Android-Homescreen, damit man die Tools schnell findet und direkt starten kann.
+
+Wichtig ist außerdem der modulare Aufbau, damit später neue Werkzeuge unkompliziert ergänzt werden können, ohne die bestehende App jedes Mal groß umbauen zu müssen.
+
+Technisch setzen wir das mit Android Studio und in Kotlin um.
 -->
 **Projekt:** Kasten der Pandora
 - Digitaler Werkzeugkasten als Android-App
@@ -34,7 +42,23 @@ Kurze Einführung ins Projekt: Android-App mit mehreren Alltagstools. Fokus auf 
 - MinSdk 31, TargetSdk 36
 
 ---
+<!--
+Jetzt erzähle ich wie wir das Projekt begonnen haben.
 
+Als erstes zur Projektinitialisierung.
+Als erstes haben wir ein GitHub-Repository bei Matthias erstellt und da rein dann ein leeres Android-Studio-Projekt und eine ReadME gepusht.
+Dann haben wir uns erste Notizen, Vorstellungen und unsere Planung in der Lucid.app aufgeschrieben. Dort haben wir festgehalten welche Funktionen unsere App haben soll und was dafür benötigt wird.
+Die ersten Icons für die App an sich und die einzelnen Anwendungen haben wir auch schon relativ früh eingebaut.
+Danach haben wir uns um die git-ignore gekümmert, dass wir keine build- oder ide-Dateien mit ins Repo mit hochladen.
+Das Ziel von dem Ganzen war vor allem eine solide Grundlage für Teamarbeit zu schaffen: klare Code-Konventionen, ein einheitlicher Aufbau und eine dokumentierte Architektur, damit jeder im Team schnell reinkommt und wir langfristig sauber weiterentwickeln können.
+
+Jetzt zur Infrastruktur.
+Hier haben wir eine Basisklasse eingeführt, die für alle Tools als gemeinsame Grundlage dient.
+Die liefert uns einen gemeinsamen Header, also eine einheitliche Kopfzeile für alle Tools, und sorgt gleichzeitig für eine konsistente Navigation.
+Dazu gehört auch ein Zurück-Button, damit man nicht pro Tool wieder eine eigene Logik bauen muss.
+Außerdem unterstützen wir Window Insets, damit Edge-to-Edge sauber funktioniert, also dass die Inhalte korrekt mit Statusbar und Navigationbar umgehen.
+Die Vorteile sind, dass wir Code-Duplizierung vermeiden; wir bekommen ein einheitliches UI-Verhalten über die ganze App hinweg, und wir machen es insgesamt deutlich einfacher, später neue Tools zu ergänzen, weil wir auf dieser Basis einfach aufbauen können.
+-->
 <div class="columns">
 <div>
 
@@ -75,7 +99,7 @@ Zwei Säulen meiner Arbeit: Links die Initialisierung, rechts die Infrastruktur.
 ---
 #### `BaseToolActivity`
 <!--
-Herzstück der Architektur: Abstrakte Basisklasse verhindert Code-Duplizierung und sorgt für einheitliches Verhalten.
+Die BaseToolActivity ist unsere Basisklasse, welche ich vorhin angesprochen hatte. Du durch die verhindern wir Code-Duplizierung und sorgen für ein einheitliches Verhalten.
 -->
 
 Abstrakte Basisklasse für Tool-Screens mit einheitlichem Setup
@@ -94,7 +118,13 @@ abstract class BaseToolActivity : AppCompatActivity() {
 
 ---
 <!--
-Die wichtigsten überschreibbaren Methoden. setupToolContent für UI-Init ist am häufigsten genutzt.
+Hier sieht man die wichtigsten Methoden aus der Basisklasse und wofür wir sie benutzen.
+
+Erstens `setupToolContent()`. Die Methode ist dafür da, dass jedes Tool sie überschreiben kann, um sein UI zu initialisieren. Also alles, was tool-spezifisch ist, kommt da rein, ohne dass wir die ganze Activity-Struktur jedes Mal neu bauen.
+
+Zweitens `onBackButtonPressed()`. Auch die ist zum Überschreiben gedacht, wenn ein Tool eine eigene Zurück-Logik braucht. Zum Beispiel wenn man erst einen Dialog schließen will oder innerhalb eines Tools eine interne Navigation hat, bevor man wirklich aus dem Tool rausgeht.
+
+Und drittens `dispatchTouchEvent()`. Die Methode hängt sich in die Touch-Events rein und leitet sie an die Wisch-Erkennung weiter. Damit können wir Gesten zentral auswerten, ohne dass jedes Tool selber Touch-Handling implementieren muss.
 -->
 
 **Wichtige Methoden:**
@@ -109,7 +139,11 @@ Die wichtigsten überschreibbaren Methoden. setupToolContent für UI-Init ist am
 
 ### Placeholder-System
 <!--
-Placeholder ermöglichten frühes Testen der Navigation ohne vollständige Tool-Implementierung.
+Jetzt komme ich zu unserem Placeholder-System.
+Die Idee dahinter war, dass wir sehr früh die Navigation und das Grundgefühl der App testen können, auch wenn die einzelnen Tools noch nicht fertig implementiert sind.
+Am Anfang haben wir haben wir für alle geplanten Tools Placeholder-Activities angelegt.
+Auf dem Homescreen habe ich eine Grid-basierte Übersicht erstellt, welche über ein responsives Icon-Sizing verfügt.
+Nach und nach haben wir dann unsere Platzhalter-Activities mit den echten Tools ersetzt wie zum Beispiel einer Lampe, einer Wasserwaage und einem Kompass.
 -->
 
 <div class="columns">
@@ -138,7 +172,10 @@ Placeholder ermöglichten frühes Testen der Navigation ohne vollständige Tool-
 
 ### Settings-Infrastruktur
 <!--
-Zentrale Einstellungsseite mit SharedPreferences für Persistenz. Screenshot zeigt das finale Design.
+Jetzt komme ich zu unserer Settings-Activity.
+Ich habe eine zentrale Einstellungsseite erstellt. Dabei läuft die Persistenz über SharedPreferences, damit die gespeicherten Einstellungen nach dem schließen der App nicht verlorengehen sondern, beim nächsten Start wieder verfügbar sind.
+Außerdem kann man hier zwischen Deutsch und Englisch, der Anzahl der Spalten des Rasters auf dem Homescreen und dem Darkmode auswählen.
+Auf dem Screenshot sieht man auch das finale Design von der Seite.
 -->
 
 **Einstellungsseite implementiert:**
@@ -158,7 +195,9 @@ Zentrale Einstellungsseite mit SharedPreferences für Persistenz. Screenshot zei
 
 ### Darkmode<br>Implementierung
 <!--
-Zwei Screenshots zeigen Light und Dark Mode. Besondere Herausforderung: Kontraste und Icon-Sichtbarkeit.
+Jetzt zur Darkmode-Implementierung.
+Hier sieht man in den zwei Screenshots einmal den Light Mode und den Dark Mode. Die besondere Herausforderung dabei war vor allem, dass die Kontraste von Farben und Texten passen.
+Hier sieht man nicht nur den Darkmode sondern auch die Rasteränderungen. Auf dem linken ist das Raster in den Einstellungen auf 4 gesetzt während auf dem rechten Bild das Raster 3 ist.
 -->
 **Dark Mode Feature:**
 - Umschaltbare Themes
@@ -178,10 +217,11 @@ Zwei Screenshots zeigen Light und Dark Mode. Besondere Herausforderung: Kontrast
 
 ### Grid-Columns Einstellung
 <!--
-Nutzer kann 2-5 Spalten wählen. Icons werden automatisch skaliert. Live-Vorschau während der Auswahl.
+Jetzt komme ich kurz zu den Grid-Columns-Einstellungen.
+Dabei kann man zwischen 2 und 6 Spalten wählen. Die Größe der Icons wird automatisch angepasst und wie bereits erwähnt wird auch dies in SharedPreferences gespeichert.
 -->
 **Anpassbare Raster-Spalten:**
-- 2-5 Spalten wählbar
+- 2-6 Spalten wählbar
 - Dynamische Icon-Größenberechnung
 - Responsive Layout
 - Persistenz der Auswahl
@@ -195,7 +235,11 @@ Nutzer kann 2-5 Spalten wählen. Icons werden automatisch skaliert. Live-Vorscha
 
 ### Merge-Management
 <!--
-Koordination der Feature-Branches war wichtig für reibungslose Zusammenarbeit. PR-Workflow über GitHub.
+Als nächstes ist das Merge-Management.
+Das war bei uns ein wichtiger Punkt, weil wir mehrere Feature-Branches parallel hatten und die Koordination entscheidend war, damit die Zusammenarbeit reibungslos läuft. Dabei haben wir mit GitHub und Pull-Requests gearbeitet.
+Konkret haben wir mit Feature-Branches gearbeitet, zum Beispiel `settings_view`, `clock` und weitere. Diese Branches wurden systematisch gemanagt, also nicht einfach wild zusammengeworfen, sondern Schritt für Schritt über Pull Requests zusammengeführt.
+Dabei gehörten natürlich auch Konfliktlösungen dazu. Wir mussten also aufpassen, dass wenn mehrere an einem gearbeitet haben, was aber seltener vorkam, dass keine Konflikte vorkamen oder diese schnell wieder behoben wurden.
+Der Ablauf war dann: Feature fertigstellen, Pull Request erstellen, prüfen, und dann mergen.
 -->
 **Zusammenführung von Branches:**
 - Feature-Branches: `settings_view`, `clock`, etc.
@@ -213,7 +257,10 @@ Koordination der Feature-Branches war wichtig für reibungslose Zusammenarbeit. 
 
 ### Button-Positioning & UX
 <!--
-Material Design Richtlinien eingehalten. Touch-Targets mindestens 48dp. Screen Reader Unterstützung implementiert.
+Jetzt kurz zum Button-Positioning und zur User-Experience.
+Hier war uns wichtig, dass wir die Material Design Richtlinien einhalten und alle Buttons gut zugänglich machen. 
+Dafür haben wir konsistente UI-Elemente geschaffen, indem wir Buttons standardisiert haben. Das heißt: gleiche Positionierung, gleiche Abstände und ein einheitliches Verhalten über die App hinweg.
+Bei den konkreten Verbesserungen gehören dazu einmal die Umsetzung nach Material Design Richtlinien, dann Ripple-Effekte für Tap-Feedback, Fokus-Zustände für bessere Bedienbarkeit.
 -->
 **Konsistente UI-Elemente:**
 - Button-Standardisierung
@@ -231,7 +278,10 @@ Material Design Richtlinien eingehalten. Touch-Targets mindestens 48dp. Screen R
 
 ### Header-Layout
 <!--
-Wiederverwendbares Header-Layout via include-Tag. Reduziert Duplizierung und erleichtert Änderungen.
+Und jetzt zum Header-Layout.
+Hier haben wir ein wiederverwendbares Header-Layout gebaut, das wir über den include-Tag einbinden. Der Hauptgrund war, Duplizierung zu reduzieren und Änderungen später deutlich einfacher zu machen, weil wir den Header dann nur an einer Stelle anpassen müssen.
+Der Header ist dabei für alle Tools gemeinsam: Der Titel-Text ist dynamisch und wird je Tool gesetzt, damit jedes Tool oben korrekt benannt ist.
+Rechts ist das App-Icon platziert, links der Zurück-Button, und das Styling ist überall einheitlich, damit sich die App konsistent anfühlt und man sofort erkennt, dass man innerhalb derselben Anwendung ist.
 -->
 **Gemeinsamer Header:**
 - Titel-Text dynamisch pro Tool
@@ -248,7 +298,7 @@ Wiederverwendbares Header-Layout via include-Tag. Reduziert Duplizierung und erl
 
 ### Placeholders für Tools
 <!--
-Demo-Activities ermöglichten Testen der App-Struktur bevor echte Tools implementiert waren.
+Durch Demo-Activities wurde uns das Testen der App-Struktur bevor echte Tools implementiert waren ermöglicht. Dabei musste keine Funktion der einzelnen Anwendungen implementiert sein damit wir das Grid und die Navigation testen konnten.
 -->
 **Demo-Aktivitäten:**
 - Zeigten App-Struktur
@@ -264,7 +314,7 @@ Demo-Activities ermöglichten Testen der App-Struktur bevor echte Tools implemen
 
 ### Dokumentationsstruktur
 <!--
-README enthält alles Wichtige für neue Entwickler. KI-Einsatz transparent dokumentiert.
+Unsere Dokumentationsstruktur haben wir in unserem README festgehalten und dies enthält alles Wichtige für neue Entwickler. Darin haben wir zum Beispiel die Projektbeschreibung und Projektplanung notiert, sowie KI-Einsatz transparent dokumentiert.
 -->
 **README.md Content:**
 - Projektbeschreibung
@@ -283,7 +333,9 @@ README enthält alles Wichtige für neue Entwickler. KI-Einsatz transparent doku
 
 ### Git-Workflow
 <!--
-Feature-Branches und PR-Workflow. Commit-Messages beschreiben das Warum, nicht das Was.
+Jetzt zu unserem Git-Wrokflow.
+Wie bereits gesagt haben wir Feature-Branches, Pull-Requests, finale Reviews und merges in GitHub genutzt und durchgeführt.
+Außerdem war uns wichtig, dass unsere Commit-Messages nicht nur beschreiben was geändert wurde, sondern vor allem warum.
 -->
 **Branching-Strategie:**
 - Feature-Branches pro Tool
@@ -300,7 +352,13 @@ Feature-Branches und PR-Workflow. Commit-Messages beschreiben das Warum, nicht d
 
 ### Design-System
 <!--
-Material Design 3 als Grundlage. Konsistente Farben, Typographie und Abstände für professionelles Erscheinungsbild.
+Dann zum Design-System.
+Als Grundlage nutzen wir Material Design 3, damit wir von Anfang an ein konsistentes und modernes UI haben.
+Dabei geht’s vor allem um visuelle Konsistenz: Wir haben ein Farbschema definiert, also feste Farben für Primär- und Sekundärelemente und für Zustände wie aktiv oder deaktiviert.
+Dazu kommen Typographie-Regeln, damit Überschriften, Fließtext und Labels überall gleich wirken und man nicht pro Screen andere Schriftgrößen oder Styles sieht.
+Und wir achten auf konsistente Abstände und Größen, also einheitliche Margins, Paddings und Elementgrößen, damit das Layout ruhig und professionell aussieht.
+Zusätzlich haben wir uns eine kleine Komponenten-Bibliothek aufgebaut: wiederverwendbare Views, die überall gleich funktionieren.
+Das sorgt nicht nur für konsistentes Verhalten, sondern hilft auch bei Barrierefreiheit, weil wir Accessibility-Anforderungen zentral berücksichtigen können, statt sie in jedem Screen neu zu erfinden.
 -->
 **Visuelle Konsistenz:**
 - Material Design 3
@@ -317,7 +375,12 @@ Material Design 3 als Grundlage. Konsistente Farben, Typographie und Abstände f
 
 ### Status & Rückblick
 <!--
-Zusammenfassung meiner Beiträge. Wichtigste Erkenntnis: Gute Architektur von Anfang an spart später Zeit.
+Und als letztes eine kurze Zusammenfassung meiner Beiträge in diesem Projekt.
+Ich habe mich mit den anderen beiden um die Projektinitialisierung gekümmert.
+Außerdem auch mit an der BaseToolActivity und Homepage gearbeitet, sowie das Raster implementiert.
+Die Settingsseite zu erstellen, funktionstüchtig zu machen und mein Merge-Management und meine Dokumentation aktuell zu halten war ebenfalls meine Aufgabe.
+Als letztes habe ich mich noch mit Anwendungsweitem Verbesserern, testen und der Erstellung der Kompasses-App beschäftigt.
+Erkenntnisse die man daraus ziehen kann sind, dass eine gute Architektur und Dokumentation Zeit spart und eine konsistente User Experience wichtig für die Akzeptanz ist.
 -->
 **Johannes' Beiträge Zusammenfassung:**
 - Projekt-Initialisierung
@@ -335,5 +398,5 @@ Zusammenfassung meiner Beiträge. Wichtigste Erkenntnis: Gute Architektur von An
 
 ## Übergabe an Matthias Reps
 <!--
-Matthias übernimmt und zeigt seine Tool-Implementierungen: Counter, Light, I18n, Decibel Meter und Spirit Level.
+Nun übernimmt Matthias und zeigt seine Tool-Implementierungen.
 -->
