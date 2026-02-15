@@ -349,3 +349,24 @@ section.fade-top-to-bottom img {
 }
 
 
+@media print {
+    /* Remove all shadows */
+    table {
+        box-shadow: none;
+    }
+
+    tbody tr:hover {
+        box-shadow: none;
+    }
+
+    section a:hover {
+        box-shadow: none;
+    }
+
+    /* Disable all animations for PDF */
+    *, *::before, *::after {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
