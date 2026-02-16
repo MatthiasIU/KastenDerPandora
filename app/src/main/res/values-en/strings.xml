@@ -12,6 +12,7 @@
     <string name="alarm">Alarm</string>
     <string name="stopwatch">Stopwatch</string>
     <string name="timer">Timer</string>
+    <string name="timer_set_time">Set Time</string>
     <string name="no_alarms_set">No alarms set</string>
     <string name="start">Start</string>
     <string name="stopwatch_stop">Stop</string>

@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/default_time"
-        android:textSize="64sp"
+        android:textSize="42sp"
         android:textStyle="bold"
         android:fontFamily="monospace"
         android:textColor="?android:attr/textColorPrimary"
