@@ -12,6 +12,8 @@
     <string name="counter">Zähler</string>
     <string name="clock">Uhr</string>
     <string name="alarm">Alarm</string>
+    <string name="alarm_add">Alarm hinzufügen</string>
+    <string name="alarm_delete">Alarm löschen</string>
     <string name="stopwatch">Stoppuhr</string>
     <string name="timer">Timer</string>
     <string name="timer_set_time">Zeit einstellen</string>
